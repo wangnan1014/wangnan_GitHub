@@ -1,0 +1,19 @@
+package com.heag.rcpc.service;
+
+import java.util.ArrayList;
+
+import com.heag.rcpc.model.PcEvaluateRelation;
+import com.heag.rcpc.model.PcEvaluateRelationExample;
+import com.heag.rcpc.model.PcSendInvitations;
+
+public interface IPcSendInvitationsService {
+	String insertSelective1(PcSendInvitations pa);
+
+	ArrayList<PcEvaluateRelation> selectByExample(PcEvaluateRelationExample per);
+
+	String deleteByPrimaryKey(String id);
+
+	String updateByPrimaryKeySelective(PcEvaluateRelation pa);
+
+
+}

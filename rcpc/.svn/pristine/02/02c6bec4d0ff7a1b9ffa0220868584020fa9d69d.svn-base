@@ -1,0 +1,18 @@
+package com.heag.rcpc.service;
+
+import java.util.ArrayList;
+
+import com.heag.rcpc.model.PcEvaluateRelation;
+import com.heag.rcpc.model.PcEvaluateRelationExample;
+
+public interface IPcEvaluateRelationService {
+
+	ArrayList<PcEvaluateRelation> selectByExample(PcEvaluateRelationExample pee);
+
+	String insertSelective(PcEvaluateRelation per);
+
+	int updateByExampleSelective(PcEvaluateRelation per,PcEvaluateRelationExample pere);
+
+	int updateByPrimaryKeySelective(PcEvaluateRelation per);
+
+}

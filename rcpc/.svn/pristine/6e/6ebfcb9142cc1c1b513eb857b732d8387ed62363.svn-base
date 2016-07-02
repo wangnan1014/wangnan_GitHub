@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+    <constant name="struts.enable.DynamicMethodInvocation" value="true"/>
+    <constant name="struts.i18n.encoding" value="UTF-8"/>
+
+    <!-- 上传的临时文件路径、大小-->
+    <constant name="struts.multipart.saveDir" value="/tmp"/>
+    <constant name="struts.multipart.maxSize" value="1000000000"/>
+	
+    <package name="myPackage" extends="struts-default">
+
+    <!--    <default-action-ref name="index" />
+
+        <action name="index" class="com.heag.IndexAction">
+            <result>/WEB-INF/jsp/index.jsp</result>
+        </action>
+
+        <action name="helloWorld" class="helloWorldAction">
+            <result name="input">/index.jsp</result>
+            <result>/WEB-INF/jsp/helloWorld.jsp</result>
+        </action> -->
+
+        <!-- 定义一个拦截器 -->
+        <interceptors>
+            <interceptor name="authority" class="com.heag.rcpc.util.AuthorityUtil"/>
+            <!-- 拦截器栈 -->
+            <interceptor-stack name="mydefault">
+                <interceptor-ref name="authority" />
+            </interceptor-stack>
+        </interceptors>
+
+        <default-action-ref name="login" />
+
+        <!-- 定义全局Result -->
+        <global-results>
+            <!-- 当返回login视图名时，转入/login.jsp页面 -->
+            <result name="login">/page/login.jsp</result>
+        </global-results>
+
+        <action name="login" class="loginAction">
+            <result name="main">/page/main.jsp</result>
+            <result name="logout">/page/login.jsp</result>
+            <result>/page/login.jsp</result>
+        </action>
+
+        <action name="loginMain" class="loginAction" method="mainpage">
+            <result name="main">/page/main.jsp</result>
+        </action>
+
+        <action name="mapReport" class="mapReportAction">
+            <result>/page/mapreport.jsp</result>
+        </action>
+
+    </package>
+
+<!--    <package name="login" extends="struts-default" namespace="/login">
+        <action name="login" class="loginAction">
+            <result name="main">/page/main.jsp</result>
+            <result name="logout">/page/login.jsp</result>
+            <result>/page/login.jsp</result>
+        </action>
+    </package>
+-->
+
+	<package name="register"  extends="struts-default"  namespace="/register" >
+
+        <interceptors>
+            <interceptor name="authority" class="com.heag.rcpc.util.AuthorityUtil"/>
+            <!-- 拦截器栈 -->
+            <interceptor-stack name="mydefault">
+                <interceptor-ref name="authority" />
+            </interceptor-stack>
+        </interceptors>
+
+        <global-results>
+            <!-- 当返回login视图名时，转入/login.jsp页面 -->
+            <result name="login">/page/login.jsp</result>
+        </global-results>
+
+		<action name="register" class="registerAction" >
+		</action>
+		<action name="pwMod" class="registerAction" method="pwMod">
+		</action>		
+		<action name="select" class="registerAction" method="select">
+			<result>/page/register.jsp</result>
+		</action>		
+	</package>
+<!--    
+	<package name="project" extends="json-default" namespace="/project">
+        <action name="login" class="loginAction">
+            <result name="loginpage">/page/main.jsp</result>
+            <result>/page/login.jsp</result>
+        </action>
+    </package>
+-->
+   <package name="project" extends="struts-default" namespace="/project">
+        <!-- 定义一个拦截器 -->
+        <interceptors>
+            <interceptor name="authority" class="com.heag.rcpc.util.AuthorityUtil"/>
+            <!-- 拦截器栈 -->
+            <interceptor-stack name="mydefault">
+                <interceptor-ref name="authority" />
+            </interceptor-stack>
+        </interceptors>
+
+        <default-action-ref name="login" />
+
+        <!-- 定义全局Result -->
+        <global-results>
+            <!-- 当返回login视图名时，转入/login.jsp页面 -->
+            <result name="login">/page/login.jsp</result>
+        </global-results>
+           
+		<action name="goto" class="projectAction" method="gotoPage">
+			<result>${gotoPage}</result>
+		</action>
+		<action name="project" class="projectAction">
+		</action>	
+
+   </package>
+   <package name="log" extends="struts-default" namespace="/log">
+        <!-- 定义一个拦截器 -->
+        <interceptors>
+            <interceptor name="authority" class="com.heag.rcpc.util.AuthorityUtil"/>
+            <!-- 拦截器栈 -->
+            <interceptor-stack name="mydefault">
+                <interceptor-ref name="authority" />
+            </interceptor-stack>
+        </interceptors>
+
+        <default-action-ref name="login" />
+
+        <!-- 定义全局Result -->
+        <global-results>
+            <!-- 当返回login视图名时，转入/login.jsp页面 -->
+            <result name="login">/page/login.jsp</result>
+        </global-results>   
+   
+		<action name="goto" class="logAction" method="gotoPage">
+			<result>/page/logList.jsp</result>
+		</action>
+		<action name="log" class="logAction">
+		</action>
+
+    </package>
+   <package name="toOut" extends="struts-default" namespace="/toOut">
+        <!-- 定义一个拦截器 -->
+        <interceptors>
+            <interceptor name="authority" class="com.heag.rcpc.util.AuthorityUtil"/>
+            <!-- 拦截器栈 -->
+            <interceptor-stack name="mydefault">
+                <interceptor-ref name="authority" />
+            </interceptor-stack>
+        </interceptors>
+
+        <default-action-ref name="login" />
+
+        <!-- 定义全局Result -->
+        <global-results>
+            <!-- 当返回login视图名时，转入/login.jsp页面 -->
+            <result name="login">/page/login.jsp</result>
+        </global-results>   
+   
+		<action name="toOut" class="toOutAction">
+		</action>
+		<action name="goto" class="toOutAction" method="gotoPage">
+			<result>${gotoPage}</result>
+		</action>		   
+					 	
+    </package>
+   <package name="user" extends="struts-default" namespace="/user">
+        <!-- 定义一个拦截器 -->
+        <interceptors>
+            <interceptor name="authority" class="com.heag.rcpc.util.AuthorityUtil"/>
+            <!-- 拦截器栈 -->
+            <interceptor-stack name="mydefault">
+                <interceptor-ref name="authority" />
+            </interceptor-stack>
+        </interceptors>
+
+        <default-action-ref name="login" />
+
+        <!-- 定义全局Result -->
+        <global-results>
+            <!-- 当返回login视图名时，转入/login.jsp页面 -->
+            <result name="login">/page/login.jsp</result>
+        </global-results>   
+   
+		<action name="user" class="userAction">
+		</action> 
+   </package>
+    <package name="questionnaire" extends="struts-default" namespace="/questionnaire">
+        <!-- 定义全局Result -->
+		<action name="questionnaire" class="questionnaireAction">
+		</action> 
+   </package>  
+   
+</struts>

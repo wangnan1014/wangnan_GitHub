@@ -1,0 +1,45 @@
+package com.heag.rcpc.dao.impl;
+
+import java.util.ArrayList;
+
+import com.heag.rcpc.dao.IPcEvaluateDao;
+import com.heag.rcpc.model.PcAskinfo;
+import com.heag.rcpc.model.PcAskinfoExample;
+import com.heag.rcpc.model.PcEvaluate;
+import com.heag.rcpc.model.PcEvaluateExample;
+
+public class PcEvaluateDaoImpl implements IPcEvaluateDao {
+
+	public Integer countByExample(PcEvaluateExample pae) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String deleteByPrimaryKey(Integer eid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String insertSelective(PcEvaluate pa) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ArrayList<PcEvaluate> selectByExample(PcEvaluateExample pae) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public PcEvaluate selectByPrimaryKey(Integer eid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String updateByPrimaryKey(PcEvaluate pa) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+}

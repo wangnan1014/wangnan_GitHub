@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" >
+        	<value>mail.heag.com</value>
+        </property>
+        <property name="username">
+        	<value>hr@heag.com</value>
+        </property>
+        <property name="password">
+        	<value>;hr62558096</value>
+        </property>
+        <!-- SMTP服务器验证 -->
+        <property name="javaMailProperties">
+            <props>
+                <!-- 验证身份 -->
+                <prop key="mail.smtps.auth">true</prop>
+				<prop key="mail.transport.protocol">smtp</prop>
+				 
+				 
+				<prop key="mail.smtp.starttls.enable">false</prop>
+           </props>
+        </property>
+    </bean>
+    
+    <bean id="mailMessage" class="org.springframework.mail.SimpleMailMessage">
+    	<property name="from">
+    		<value>hr@heag.com</value>
+    	</property>
+    </bean>	
+    <bean id="email" class="com.heag.rcpc.util.Email"></bean>
+</beans>

@@ -1,0 +1,45 @@
+package com.heag.rcpc.dao;
+
+import java.util.ArrayList;
+
+import com.heag.rcpc.model.PcQuestion;
+import com.heag.rcpc.model.PcQuestionExample;
+
+public interface IPcQuestionDao {
+    /**
+     * 根据条件查询所有题目
+     * @param PcQuestionExample
+     * @return 成功  ArrayList<PcQuestion>  
+     */
+    public ArrayList<PcQuestion> selectByExample(PcQuestionExample pae);
+    /**
+     * 新增题目
+     * @param PcQuestion
+     * @return   
+     */
+    public String insertSelective(PcQuestion pa);  
+    /**
+     * 根据aid 查询题目
+     * @param qid
+     * @return   PcQuestion
+     */
+    public PcQuestion selectByPrimaryKey(Integer qid);  
+    /**
+     * 根据条件查询题目数
+     * @param PcQuestionExample
+     * @return   Integer
+     */    
+    public Integer countByExample(PcQuestionExample pae);
+    /**
+     * 根据aid 删除题目
+     * @param qid
+     * @return   PcAskinfo
+     */   
+    public String deleteByPrimaryKey(Integer qid);
+    /**
+     * 根据qid更新题目
+     * @param aid
+     * @return   PcAskinfo
+     */   
+    public String updateByPrimaryKey(PcQuestion pa);    
+}

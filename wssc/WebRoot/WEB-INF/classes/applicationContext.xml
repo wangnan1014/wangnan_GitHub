@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+                     http://www.springframework.org/schema/beans/spring-beans.xsd
+                     http://www.springframework.org/schema/tx
+                     http://www.springframework.org/schema/tx/spring-tx.xsd
+                     http://www.springframework.org/schema/aop
+                     http://www.springframework.org/schema/aop/spring-aop.xsd
+                     http://www.springframework.org/schema/context
+      				 http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+		<bean id="date" class="java.util.Date"> </bean>
+		
+	
+		<import resource="/conf/app-action.xml"/>
+		<import resource="/conf/app-service.xml"/>
+		<import resource="/conf/app-dao.xml"/>
+		<import resource="/conf/app-datasource.xml"/>
+		
+		<!-- 自动扫描,使用注解的方式注入 -->
+		<context:component-scan base-package="com.it.shop.."/>
+					
+		
+		<!-- 配置advice（通知） -->
+		 <tx:advice id="advice" transaction-manager="transactionManager">
+		 	<tx:attributes>
+		 		<tx:method name="save*" propagation="REQUIRED"/>
+		 		<tx:method name="update*" propagation="REQUIRED"/>
+		 		<tx:method name="delete*" propagation="REQUIRED"/>
+		 		<tx:method name="*" propagation="SUPPORTS"/>
+		 	</tx:attributes>
+		 </tx:advice>	
+		 <!-- 配置AOP切面 -->	
+		 <aop:config>  
+		    <!-- 配置哪些包的类要切入事务 -->  
+		    <aop:pointcut id="pointcut" expression="execution(* com.it.shop.service.impl.*.*(..))" />  
+		    <aop:advisor advice-ref="advice" pointcut-ref="pointcut"/>
+		    <!-- 连接了<span style="font-family:Microsoft YaHei;">上</span>面的advice和上面的pointcut -->  
+		    <!-- aop:pointcut要写在aop:advisor上面，否则会报错 -->  
+		 </aop:config>
+		 	
+</beans>

@@ -1,0 +1,8 @@
+package com.heag.rcpc.service.impl;
+
+import com.heag.rcpc.service.IPcAskinfoService;
+
+public class PcAskinfoServiceImpl implements IPcAskinfoService {
+
+
+}

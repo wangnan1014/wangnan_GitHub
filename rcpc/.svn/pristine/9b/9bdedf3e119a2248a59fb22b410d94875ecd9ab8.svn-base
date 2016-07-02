@@ -1,0 +1,80 @@
+package com.heag.rcpc.action;
+
+import java.io.PrintWriter;
+import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.log4j.Logger;
+import org.apache.struts2.ServletActionContext;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.heag.rcpc.model.PcEvaluateRelation;
+import com.heag.rcpc.model.PcEvaluateRelationExample;
+import com.heag.rcpc.service.IPcSendInvitationsService;
+import com.heag.rcpc.util.JsonUtil;
+import com.opensymphony.xwork2.ActionSupport;
+
+public class SendInvitationsAction extends ActionSupport {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	@SuppressWarnings("unused")  
+	private static final Logger logger=Logger.getLogger("report.debug");
+	private  PcEvaluateRelation paMess;
+	@Autowired
+	private  IPcSendInvitationsService pcSendInvitationsService;
+	HttpServletResponse res = ServletActionContext.getResponse();  
+	HttpServletRequest req = ServletActionContext.getRequest(); 
+	@Override
+	public String execute() throws Exception {
+		// TODO Auto-generated method stub 
+		return SUCCESS;
+	}
+	
+	public String getDataList() throws Exception {
+		res.setCharacterEncoding("UTF-8");
+		PrintWriter out = null;
+		@SuppressWarnings("unused")
+		String result="0";
+		PcEvaluateRelationExample pre = null;
+		ArrayList<PcEvaluateRelation> arr = pcSendInvitationsService.selectByExample(pre);
+		System.out.println("牛牛牛牛");
+		
+		out = res.getWriter();
+		out.write(JsonUtil.arrToJson(arr));
+		//System.out.println(JsonUtil.arrToJson(arr));
+    	out.close();		
+		return NONE;
+	}
+	
+	public String editSendPeople() throws Exception {
+		PrintWriter out = res.getWriter();
+		String result="0";		
+		if(req.getParameter("id")!=null&&!"".equals(req.getParameter("id"))){
+			paMess = new PcEvaluateRelation();
+			//paMess.setId(req.getParameter("id"));
+			paMess.setEmail(req.getParameter("email"));
+			paMess.setEvaluator(req.getParameter("evaluator"));
+			paMess.setId(new Integer(req.getParameter("id")));			
+			result =pcSendInvitationsService.updateByPrimaryKeySelective(paMess);
+		}
+		out.write(result);
+		out.close();
+		return NONE;		
+
+	}
+	public String deleteSendPeople() throws Exception {
+		PrintWriter out = res.getWriter();
+		String result="0";
+		if(req.getParameter("id")!=null&&!"".equals(req.getParameter("id"))){
+			result =pcSendInvitationsService.deleteByPrimaryKey(req.getParameter("id"));
+		}
+		out.write(result);
+		out.close();
+		return NONE;
+	}	
+}
+

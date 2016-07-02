@@ -1,0 +1,36 @@
+package com.heag.rcpc.service.impl;
+
+import java.util.ArrayList;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.heag.rcpc.dao.IPcEvaluateDao;
+import com.heag.rcpc.model.PcEvaluate;
+import com.heag.rcpc.model.PcEvaluateExample;
+import com.heag.rcpc.service.IPcEvaluateService;
+
+
+public class PcEvaluateServiceImpl implements IPcEvaluateService {
+
+	public String insertSelective(PcEvaluate pe) {
+		// TODO Auto-generated method stub
+		return pcEvaluateDao.insertSelective(pe);
+	}
+	
+	public ArrayList<PcEvaluate> selectByExample(PcEvaluateExample pee) {
+		// TODO Auto-generated method stub
+		return pcEvaluateDao.selectByExample(pee);
+	}
+	
+	
+	
+	
+	@Autowired
+	private IPcEvaluateDao pcEvaluateDao;
+
+
+
+
+	
+
+}

@@ -1,0 +1,125 @@
+package com.heag.rcpc.action;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.log4j.Logger;
+import org.apache.struts2.ServletActionContext;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.heag.rcpc.model.PcEvaluate;
+import com.heag.rcpc.model.PcEvaluateExample;
+import com.heag.rcpc.model.PcEvaluateExample.Criteria;
+
+import com.heag.rcpc.service.IPcEvaluateService;
+import com.heag.rcpc.util.ConstantsUtil;
+import com.heag.rcpc.util.JsonUtil;
+import com.opensymphony.xwork2.ActionSupport;
+
+public class EvaluateAction extends ActionSupport{
+	
+	private static final Logger logger=Logger.getLogger("report.debug");
+	HttpServletResponse response = ServletActionContext.getResponse();  
+	HttpServletRequest request = ServletActionContext.getRequest();
+	
+	@Override
+	public String execute() throws Exception {
+		// TODO Auto-generated method stub
+		return SUCCESS;
+	}
+	
+	/**
+	 * 
+	 * 獲取所有數據
+	 * @return
+	 */
+	public String getDataList(){
+		
+		System.out.println("=============");
+		response.setCharacterEncoding("UTF-8");
+		PrintWriter out =null;
+		//String result="0";
+		ArrayList<PcEvaluate> evaluteArr = null;
+		try {
+			int aid= Integer.parseInt(request.getParameter("aid"));
+			PcEvaluateExample pee = new PcEvaluateExample();
+			Criteria criteria = pee.createCriteria();
+			criteria.andAidEqualTo(aid);
+			System.out.println("aid============="+aid);
+			criteria.andIsdeleteEqualTo(ConstantsUtil.NOTDELETED);
+			
+			evaluteArr=pcEvaluateService.selectByExample(pee);
+			
+			out = response.getWriter();
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String dataListStr=JsonUtil.arrToJson(evaluteArr);
+		if(null!=evaluteArr){System.out.println("evaluteArr=================="+evaluteArr.size());}
+		System.out.println("dataListStr=================="+dataListStr);
+		out.write(dataListStr);
+    	out.close();		
+		return NONE;
+		
+	}
+	
+	
+	@SuppressWarnings("finally")
+	public String addEvaluate(){
+		
+		/**
+		 * 增加评估人员
+		 */
+		System.out.println("+++++++");
+		response.setCharacterEncoding("UTF-8");
+		PrintWriter out =null;
+		String result="0";
+		try{
+			System.out.println("ename================="+request.getParameter("ename"));
+			pe = new PcEvaluate();
+			int aid= Integer.parseInt(request.getParameter("aid"));
+			pe.setAid(aid);
+			pe.setEname(request.getParameter("ename"));
+			pe.setDname(request.getParameter("dname"));
+			pe.setEmail(request.getParameter("email"));
+			pe.setRemark(request.getParameter("remark"));
+			
+			result=pcEvaluateService.insertSelective(pe);
+		    System.out.println("result=================="+result);
+			out = response.getWriter();
+		}catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			out.write(result);
+			out.close();
+			return NONE;			
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	private PcEvaluate pe;
+	@Autowired
+	private IPcEvaluateService pcEvaluateService;
+	
+	
+
+}

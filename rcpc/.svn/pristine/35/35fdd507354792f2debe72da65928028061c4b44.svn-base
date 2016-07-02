@@ -1,0 +1,143 @@
+package com.heag.rcpc.action;
+
+import java.io.PrintWriter;
+import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.log4j.Logger;
+import org.apache.struts2.ServletActionContext;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.heag.rcpc.model.PcEvaluateRelation;
+import com.heag.rcpc.model.PcEvaluateRelationExample;
+import com.heag.rcpc.model.PcEvaluateRelationExample.Criteria;
+import com.heag.rcpc.service.IPcEvaluateRelationService;
+import com.heag.rcpc.service.IPcSendInvitationsService;
+import com.heag.rcpc.util.ConstantsUtil;
+import com.heag.rcpc.util.Email;
+import com.heag.rcpc.util.JsonUtil;
+import com.opensymphony.xwork2.ActionSupport;
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.Loader;
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
+
+public class SendInvitationsAction extends ActionSupport {
+	/**
+	 * 
+	 */
+	
+	private static final long serialVersionUID = 1L;
+	@SuppressWarnings("unused")  
+	private static final Logger logger=Logger.getLogger("report.debug");
+	private  PcEvaluateRelation paMess;
+	@Autowired
+	private  IPcSendInvitationsService pcSendInvitationsService;//spring注入
+	@Autowired
+	private Email email;
+	HttpServletResponse res = ServletActionContext.getResponse();  
+	HttpServletRequest req = ServletActionContext.getRequest(); 
+	@Override
+	public String execute() throws Exception {
+		// TODO Auto-generated method stub 
+		return SUCCESS;
+	}
+	
+	public String getDataList() throws Exception {
+		res.setCharacterEncoding("UTF-8");
+		PrintWriter out = null;
+		PcEvaluateRelationExample pre = new PcEvaluateRelationExample();
+		Criteria criteria = pre.createCriteria();
+		int aid= Integer.parseInt(req.getParameter("aid"));
+		criteria.andAidEqualTo(aid);
+		criteria.andIsdeleteEqualTo(ConstantsUtil.NOTDELETED);
+		ArrayList<PcEvaluateRelation> arr = pcSendInvitationsService.selectByExample(pre);
+		//System.out.println("aid========"+aid);
+		out = res.getWriter();
+		out.write(JsonUtil.arrToJson(arr));
+		//System.out.println("JsonUtil.arrToJson(arr)========"+JsonUtil.arrToJson(arr));
+		//System.out.println(JsonUtil.arrToJson(arr));
+    	out.close();		
+		return NONE;
+	}
+	
+	public String editSendPeople() throws Exception {
+		PrintWriter out = res.getWriter();
+		String result="0";		
+		if(req.getParameter("id")!=null&&!"".equals(req.getParameter("id"))){
+			paMess = new PcEvaluateRelation();
+			//paMess.setId(req.getParameter("id"));
+			paMess.setEmail(req.getParameter("email"));
+			paMess.setEvaluator(req.getParameter("evaluator"));
+			paMess.setId(new Integer(req.getParameter("id")));
+			result =pcSendInvitationsService.updateByPrimaryKeySelective(paMess);
+		}
+		out.write(result);
+		out.close();
+		return NONE;	
+
+	}
+	
+	public String deleteSendPeople() throws Exception {
+		PrintWriter out = res.getWriter();
+		String result="0";
+		if(req.getParameter("id")!=null&&!"".equals(req.getParameter("id"))){
+			result =pcSendInvitationsService.deleteByPrimaryKey(req.getParameter("id"));
+		}
+		out.write(result);
+		out.close();
+		return NONE;
+	}
+	
+	public String doSendPeople() throws Exception {
+		PrintWriter out = res.getWriter();
+		int result=0;
+		String id = req.getParameter("checkId");
+		String aid = req.getParameter("aid");
+		String eid = req.getParameter("eid");
+		String checkId = req.getParameter("checkId");
+		String sub = req.getParameter("mailname");
+		String mailcontent = req.getParameter("mailcontent");
+		String sendEmail = req.getParameter("sendEmail");
+		System.out.println("eid======================"+eid);
+		System.out.println("checkId============================================"+checkId);
+		String a = req.getScheme();
+		String b = req.getServerName();
+		int c = req.getServerPort();
+		String sendUrl = a + "://" + b + ":" + c +"/" ; 
+		
+		
+		ArrayList<String> emailList= new ArrayList<String>();
+		String[] emails = sendEmail.split(";");
+		ArrayList<Integer> idList= new ArrayList<Integer>();
+		String[] ids = checkId.split(";");
+		
+		//Email sendMeSagge = new Email();
+		//http://127.0.0.1:8080/page/answers.jsp?aid=14&hasRoot=true&eid=22&id=16
+
+		for(int i=0;i<ids.length;i++){
+			idList.add(Integer.parseInt(ids[i]));
+			emailList.add(i, emails[i]);
+			sendUrl += "page/answers.jsp?aid=" + aid + "&hasRoot=true"+ "&eid=" + eid + "&id=" + ids[i];
+			//Email doSen = new Email();
+			email.sendEmail(sub, mailcontent, emails[i], "{链接地址}", sendUrl);
+			System.out.println("sendUrl========"+ sendUrl);
+			
+		}
+		//System.out.println("user"+user);
+		PcEvaluateRelationExample pere = new PcEvaluateRelationExample();
+		pere.createCriteria().andIdIn(idList);
+		System.out.println(pere);
+		//PcEvaluateRelation per=new PcEvaluateRelation();
+		//per.setIsdelete(ConstantsUtil.DELETED);
+		//result = pcEvaluateRelationService.updateByExampleSelective(per, pere);
+		//http://127.0.0.1:8080/page/answers.jsp?aid=15&hasRoot=true&aid=&eid=&id=
+		out.write("");
+		out.close();
+		return NONE;
+	}
+	private PcEvaluateRelation per;
+	@Autowired
+	private IPcEvaluateRelationService pcEvaluateRelationService;
+}
+

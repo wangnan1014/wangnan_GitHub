@@ -1,0 +1,14 @@
+package com.heag.rcpc.service;
+
+import java.util.ArrayList;
+
+import com.heag.rcpc.model.PcAskinfo;
+import com.heag.rcpc.model.PcQuestion;
+
+public interface IPcQuestionService {
+
+	public ArrayList<PcQuestion> selectQuestionAndOptions(PcQuestion pq);
+	public String insertSelective(PcQuestion pq);
+	public String deleteByPrimaryKey(Integer qid);
+	public String updateByPrimaryKey(PcQuestion pa);
+}

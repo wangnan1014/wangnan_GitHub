@@ -1,0 +1,120 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page import="com.heag.rcpc.util.ConstantsUtil"%>
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>华仪电气营销数据系统</title>
+
+  <!-- Bootstrap Core CSS -->
+  <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- MetisMenu CSS -->
+  <link href="../css/metisMenu.min.css" rel="stylesheet">
+
+  <!-- Timeline CSS -->
+<!--  <link href="../dist/css/timeline.css" rel="stylesheet"> -->
+
+  <!-- Custom CSS 1-->
+  <link href="../css/heagreport.css" rel="stylesheet">
+
+  
+
+  <!-- Morris Charts CSS -->
+<!--  <link href="../bower_components/morrisjs/morris.css" rel="stylesheet"> -->
+
+  <!-- Custom Fonts -->
+  <link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+  <!-- jQuery -->
+  <script src="../js/jquery.min.js"></script>
+
+  <!-- Bootstrap Core JavaScript -->
+  <script src="../js/bootstrap.min.js"></script>
+
+  <!-- Metis Menu Plugin JavaScript -->
+  <script src="../js/metisMenu.min.js"></script>
+
+  <!-- Morris Charts JavaScript -->
+  <!--<script src="../bower_components/raphael/raphael-min.js"></script>
+  <script src="../bower_components/morrisjs/morris.min.js"></script>
+  <script src="../js/morris-data.js"></script> -->
+
+  <!-- Custom Theme JavaScript -->
+  <script src="../js/menu.js"></script>
+      <!-- Custom Theme JavaScript -->
+  <!-- 
+  <script src="../js/sb-admin-2.js"></script>
+   -->
+</head>
+
+<body>
+
+<div id="wrapper">
+
+  <%@ include file="menu.jsp"%>
+
+  <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-11">
+                    <h1 class="page-header">360度评估管理</h1>
+                </div>  
+                  
+            </div>  
+				
+				<!-- 主题内容 -->
+				<div class="context">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3>题目 --- 添加，修改，删除题目，设置题目属性</h3>   
+                    </div>
+	                 <div class="panel-body">
+	                 <div class="col-lg-12" id="2">
+	                    <div class="alert alert-warning">
+						<h4><a href="#开始页面">开始</a><font color="#0000ff">&nbsp;问卷题目</font><em> 高级设置 </em></h4>
+                    </div> 
+	                    
+	                </div> 
+	               <!--  <div class="panel-footer">
+	                        <ul class="navbar-top-links ">    	
+				                <li class="dropdown">
+				                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+				                        <i class="fa fa-user fa-fw"></i> 编辑问卷
+				                    </a>
+				                    <ul class="dropdown-menu dropdown-user">
+				                        <li><a href="questionEditbegin.jsp"><i class="fa fa-user fa-fw"></i>开始</a>
+				                        </li>
+				                        <li><a href="questionEdit.jsp"><i class="fa fa-gear fa-fw"></i>问卷题目</a>
+				                        </li>
+
+				                    </ul>
+				                    <!-- /.dropdown-user -->
+				               <!-- </li>	                            	
+	                        </ul>    	
+	                        </div>-->
+	                 <div class="col-lg-12" id="2">
+	                    <div class="panel panel-primary">
+	                    <div class="panel-heading">
+	                               <h4 type="font-size:16px;color:#F00">没有题目</h4><br/>
+	                            	点击下面题型按钮添加题目<br/>
+	                            	<button type="button" class="btn btn-default">批量生成题目</button>  
+	                        </div>
+	                    </div>
+	                </div> 
+                </div> 
+
+                </div>   
+               </div>             
+  </div>
+<!-- /#page-wrapper -->
+
+</div>
+<!-- /#wrapper -->    
+  </body>
+</html>

@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.heag.rcpc.mapper.RpLogMapper" >
+  <resultMap id="BaseResultMap" type="com.heag.rcpc.model.RpLog" >
+    <id column="lid" property="lid" jdbcType="BIGINT" />
+    <result column="uid" property="uid" jdbcType="INTEGER" />
+    <result column="uname" property="uname" jdbcType="VARCHAR" />
+    <result column="cid" property="cid" jdbcType="INTEGER" />
+    <result column="cname" property="cname" jdbcType="VARCHAR" />
+    <result column="deptid" property="deptid" jdbcType="INTEGER" />
+    <result column="deptname" property="deptname" jdbcType="VARCHAR" />
+    <result column="action" property="action" jdbcType="TINYINT" />
+    <result column="actiondesc" property="actiondesc" jdbcType="VARCHAR" />
+    <result column="page" property="page" jdbcType="VARCHAR" />
+    <result column="tablename" property="tablename" jdbcType="VARCHAR" />
+    <result column="dataid" property="dataid" jdbcType="VARCHAR" />
+    <result column="dataname" property="dataname" jdbcType="VARCHAR" />
+    <result column="beforeupdate" property="beforeupdate" jdbcType="VARCHAR" />
+    <result column="afterupdate" property="afterupdate" jdbcType="VARCHAR" />
+    <result column="createdate" property="createdate" jdbcType="TIMESTAMP" />
+    <result column="isdelete" property="isdelete" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    lid, uid, uname, cid, cname, deptid, deptname, action, actiondesc, page, tablename, 
+    dataid, dataname, beforeupdate, afterupdate, createdate, isdelete
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.heag.rcpc.model.RpLogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from rp_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from rp_log
+    where lid = #{lid,jdbcType=BIGINT}
+  </select>
+  <select id="countByExample" parameterType="com.heag.rcpc.model.RpLogExample" resultType="java.lang.Integer" >
+    select count(*) from rp_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from rp_log
+    where lid = #{lid,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.heag.rcpc.model.RpLogExample" >
+    delete from rp_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.heag.rcpc.model.RpLog" >
+    insert into rp_log (lid, uid, uname, 
+      cid, cname, deptid, 
+      deptname, action, actiondesc, 
+      page, tablename, dataid, 
+      dataname, beforeupdate, afterupdate, 
+      createdate, isdelete)
+    values (#{lid,jdbcType=BIGINT}, #{uid,jdbcType=INTEGER}, #{uname,jdbcType=VARCHAR}, 
+      #{cid,jdbcType=INTEGER}, #{cname,jdbcType=VARCHAR}, #{deptid,jdbcType=INTEGER}, 
+      #{deptname,jdbcType=VARCHAR}, #{action,jdbcType=TINYINT}, #{actiondesc,jdbcType=VARCHAR}, 
+      #{page,jdbcType=VARCHAR}, #{tablename,jdbcType=VARCHAR}, #{dataid,jdbcType=VARCHAR}, 
+      #{dataname,jdbcType=VARCHAR}, #{beforeupdate,jdbcType=VARCHAR}, #{afterupdate,jdbcType=VARCHAR}, 
+      #{createdate,jdbcType=TIMESTAMP}, #{isdelete,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.heag.rcpc.model.RpLog" >
+    insert into rp_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="lid != null" >
+        lid,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="uname != null" >
+        uname,
+      </if>
+      <if test="cid != null" >
+        cid,
+      </if>
+      <if test="cname != null" >
+        cname,
+      </if>
+      <if test="deptid != null" >
+        deptid,
+      </if>
+      <if test="deptname != null" >
+        deptname,
+      </if>
+      <if test="action != null" >
+        action,
+      </if>
+      <if test="actiondesc != null" >
+        actiondesc,
+      </if>
+      <if test="page != null" >
+        page,
+      </if>
+      <if test="tablename != null" >
+        tablename,
+      </if>
+      <if test="dataid != null" >
+        dataid,
+      </if>
+      <if test="dataname != null" >
+        dataname,
+      </if>
+      <if test="beforeupdate != null" >
+        beforeupdate,
+      </if>
+      <if test="afterupdate != null" >
+        afterupdate,
+      </if>
+      <if test="createdate != null" >
+        createdate,
+      </if>
+      <if test="isdelete != null" >
+        isdelete,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="lid != null" >
+        #{lid,jdbcType=BIGINT},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="uname != null" >
+        #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="cid != null" >
+        #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="cname != null" >
+        #{cname,jdbcType=VARCHAR},
+      </if>
+      <if test="deptid != null" >
+        #{deptid,jdbcType=INTEGER},
+      </if>
+      <if test="deptname != null" >
+        #{deptname,jdbcType=VARCHAR},
+      </if>
+      <if test="action != null" >
+        #{action,jdbcType=TINYINT},
+      </if>
+      <if test="actiondesc != null" >
+        #{actiondesc,jdbcType=VARCHAR},
+      </if>
+      <if test="page != null" >
+        #{page,jdbcType=VARCHAR},
+      </if>
+      <if test="tablename != null" >
+        #{tablename,jdbcType=VARCHAR},
+      </if>
+      <if test="dataid != null" >
+        #{dataid,jdbcType=VARCHAR},
+      </if>
+      <if test="dataname != null" >
+        #{dataname,jdbcType=VARCHAR},
+      </if>
+      <if test="beforeupdate != null" >
+        #{beforeupdate,jdbcType=VARCHAR},
+      </if>
+      <if test="afterupdate != null" >
+        #{afterupdate,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isdelete != null" >
+        #{isdelete,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update rp_log
+    <set >
+      <if test="record.lid != null" >
+        lid = #{record.lid,jdbcType=BIGINT},
+      </if>
+      <if test="record.uid != null" >
+        uid = #{record.uid,jdbcType=INTEGER},
+      </if>
+      <if test="record.uname != null" >
+        uname = #{record.uname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cid != null" >
+        cid = #{record.cid,jdbcType=INTEGER},
+      </if>
+      <if test="record.cname != null" >
+        cname = #{record.cname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deptid != null" >
+        deptid = #{record.deptid,jdbcType=INTEGER},
+      </if>
+      <if test="record.deptname != null" >
+        deptname = #{record.deptname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.action != null" >
+        action = #{record.action,jdbcType=TINYINT},
+      </if>
+      <if test="record.actiondesc != null" >
+        actiondesc = #{record.actiondesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.page != null" >
+        page = #{record.page,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tablename != null" >
+        tablename = #{record.tablename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dataid != null" >
+        dataid = #{record.dataid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dataname != null" >
+        dataname = #{record.dataname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.beforeupdate != null" >
+        beforeupdate = #{record.beforeupdate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.afterupdate != null" >
+        afterupdate = #{record.afterupdate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdate != null" >
+        createdate = #{record.createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isdelete != null" >
+        isdelete = #{record.isdelete,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update rp_log
+    set lid = #{record.lid,jdbcType=BIGINT},
+      uid = #{record.uid,jdbcType=INTEGER},
+      uname = #{record.uname,jdbcType=VARCHAR},
+      cid = #{record.cid,jdbcType=INTEGER},
+      cname = #{record.cname,jdbcType=VARCHAR},
+      deptid = #{record.deptid,jdbcType=INTEGER},
+      deptname = #{record.deptname,jdbcType=VARCHAR},
+      action = #{record.action,jdbcType=TINYINT},
+      actiondesc = #{record.actiondesc,jdbcType=VARCHAR},
+      page = #{record.page,jdbcType=VARCHAR},
+      tablename = #{record.tablename,jdbcType=VARCHAR},
+      dataid = #{record.dataid,jdbcType=VARCHAR},
+      dataname = #{record.dataname,jdbcType=VARCHAR},
+      beforeupdate = #{record.beforeupdate,jdbcType=VARCHAR},
+      afterupdate = #{record.afterupdate,jdbcType=VARCHAR},
+      createdate = #{record.createdate,jdbcType=TIMESTAMP},
+      isdelete = #{record.isdelete,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.heag.rcpc.model.RpLog" >
+    update rp_log
+    <set >
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="uname != null" >
+        uname = #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="cid != null" >
+        cid = #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="cname != null" >
+        cname = #{cname,jdbcType=VARCHAR},
+      </if>
+      <if test="deptid != null" >
+        deptid = #{deptid,jdbcType=INTEGER},
+      </if>
+      <if test="deptname != null" >
+        deptname = #{deptname,jdbcType=VARCHAR},
+      </if>
+      <if test="action != null" >
+        action = #{action,jdbcType=TINYINT},
+      </if>
+      <if test="actiondesc != null" >
+        actiondesc = #{actiondesc,jdbcType=VARCHAR},
+      </if>
+      <if test="page != null" >
+        page = #{page,jdbcType=VARCHAR},
+      </if>
+      <if test="tablename != null" >
+        tablename = #{tablename,jdbcType=VARCHAR},
+      </if>
+      <if test="dataid != null" >
+        dataid = #{dataid,jdbcType=VARCHAR},
+      </if>
+      <if test="dataname != null" >
+        dataname = #{dataname,jdbcType=VARCHAR},
+      </if>
+      <if test="beforeupdate != null" >
+        beforeupdate = #{beforeupdate,jdbcType=VARCHAR},
+      </if>
+      <if test="afterupdate != null" >
+        afterupdate = #{afterupdate,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        createdate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isdelete != null" >
+        isdelete = #{isdelete,jdbcType=TINYINT},
+      </if>
+    </set>
+    where lid = #{lid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.heag.rcpc.model.RpLog" >
+    update rp_log
+    set uid = #{uid,jdbcType=INTEGER},
+      uname = #{uname,jdbcType=VARCHAR},
+      cid = #{cid,jdbcType=INTEGER},
+      cname = #{cname,jdbcType=VARCHAR},
+      deptid = #{deptid,jdbcType=INTEGER},
+      deptname = #{deptname,jdbcType=VARCHAR},
+      action = #{action,jdbcType=TINYINT},
+      actiondesc = #{actiondesc,jdbcType=VARCHAR},
+      page = #{page,jdbcType=VARCHAR},
+      tablename = #{tablename,jdbcType=VARCHAR},
+      dataid = #{dataid,jdbcType=VARCHAR},
+      dataname = #{dataname,jdbcType=VARCHAR},
+      beforeupdate = #{beforeupdate,jdbcType=VARCHAR},
+      afterupdate = #{afterupdate,jdbcType=VARCHAR},
+      createdate = #{createdate,jdbcType=TIMESTAMP},
+      isdelete = #{isdelete,jdbcType=TINYINT}
+    where lid = #{lid,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectLastInsertId" resultType="int">
+    select last_insert_id()
+  </select>
+</mapper>

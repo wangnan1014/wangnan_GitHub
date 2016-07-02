@@ -1,0 +1,21 @@
+package com.heag.rcpc.service;
+
+import java.util.Map;
+
+import com.heag.rcpc.model.PcResult;
+
+
+public interface IPcResultService {
+	/**
+	 * @param AID,qid,eid被评估人id，评估人id，评估人姓名evaluator，参数集map
+	 * @author wn
+	 *
+	 */
+	public String insertSelective(Integer aid,Integer eid,Integer id,String evaluator,String[] qidVals,Map map );
+	/**
+	 * @param AID,qid,eid被评估人id，评估人id，评估人姓名evaluator
+	 * @author wn
+	 * @return 返回符合条件记录数
+	 */
+	public String countByExample(Integer aid, Integer eid, Integer id, String evaluator);
+}

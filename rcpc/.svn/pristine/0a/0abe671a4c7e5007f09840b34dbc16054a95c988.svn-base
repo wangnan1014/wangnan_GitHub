@@ -1,0 +1,7 @@
+package com.heag.rcpc.service.impl;
+
+import com.heag.rcpc.service.IPcResultService;
+
+public class PcResultServiceImpl implements IPcResultService {
+
+}

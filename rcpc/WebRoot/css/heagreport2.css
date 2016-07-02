@@ -1,0 +1,38 @@
+/**
+*用于菜单滑动 
+*本来是heagreport.css1中的 
+*/
+
+
+.page-wrapper2 {
+    padding: 0 15px;
+    min-height: 568px;
+    background-color: #fff;
+}
+
+@media(min-width:768px) {
+    .page-wrapper2 {
+        position: inherit;
+        margin: 0 0 0 0px !important;
+        padding: 0 30px;
+        border-left: 1px solid #e7e7e7;
+    }
+}
+
+
+.vertical-center{
+  position: absolute;
+  top: 50%;
+  left: 250px;
+  transform: translate(-50%, 0%);
+  z-index:10000
+}
+.vertical-center1{
+  position: absolute ;
+  top: 50% ;
+  left: 5px !important;
+  transform: translate(-50%, 0%);
+  z-index:10000
+}
+
+

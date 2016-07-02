@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd" default-autowire="byName">
+
+       <bean id="webUserService" class="com.heag.rcpc.service.impl.WebUserServiceImpl"/>
+       <bean id="rpLogService" class="com.heag.rcpc.service.impl.RpLogServiceImpl"/>
+	   <bean id="registerService" class="com.heag.rcpc.service.impl.RegisterServiceImpl"/>
+	   <bean id="rpUserService" class="com.heag.rcpc.service.impl.RpUserServiceImpl"/>
+	   <bean id="rpRoleService" class="com.heag.rcpc.service.impl.RpRoleServiceImpl"/>   
+	   <bean id="rpCompanyService" class="com.heag.rcpc.service.impl.RpCompanyServiceImpl"/>   
+	   <bean id="rpDepartmentService" class="com.heag.rcpc.service.impl.RpDepartmentServiceImpl"/>
+	   <bean id="rpProjectService" class="com.heag.rcpc.service.impl.RpProjectServiceImpl"/>
+	   <bean id="rpIndustryService" class="com.heag.rcpc.service.impl.RpIndustryServiceImpl"/>     
+	   <bean id="rpProvinceService" class="com.heag.rcpc.service.impl.RpProvinceServiceImpl"/>     
+	   <bean id="rpRegionService" class="com.heag.rcpc.service.impl.RpRegionServiceImpl"/>     
+ 		<!-- 360度评测 -->	         
+</beans> 

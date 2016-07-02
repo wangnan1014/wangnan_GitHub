@@ -1,0 +1,98 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: Administrator
+  Date: 2015-6-17 0017
+  Time: 10:26:27
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>欢迎，请登录</title>
+
+  <!-- Bootstrap Core CSS -->
+  <link href="../css/bootstrap.min.css" rel="stylesheet">
+  <!-- MetisMenu CSS -->
+  <link href="../css/metisMenu.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link href="../css/heagreport.css" rel="stylesheet">
+  <!-- Custom Fonts -->
+  <link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <!-- jQuery -->
+  <script src="../js/jquery-2.1.4.min.js"></script>
+  <!-- Bootstrap Core JavaScript -->
+  <script src="../js/bootstrap.min.js"></script>
+  <!-- Metis Menu Plugin JavaScript -->
+  <script src="../js/metisMenu.min.js"></script>
+  <!-- Custom Theme JavaScript -->
+  <script src="../js/menu.js"></script>
+
+  <script src="../js/login.js"></script>
+  
+  <!-- JQuery Cookie -->
+  <script src="../js/jquery.cookie.js"></script> 
+  <script type="text/javascript">
+
+  </script>
+
+</head>
+
+<body>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4">
+      <div class="login-panel panel panel-default" >
+        <div class="panel-heading" style="background-color:#5CB85C">
+          <h3 class="panel-title">360度评测系统</h3>
+        </div>
+        <div class="panel-body">
+
+            <form role="form" method="post">
+            <fieldset>
+              <div class="alert alert-danger alert-dismissable" id="info">提示信息
+              </div>
+              <div class="form-group">
+                <input  class="form-control" placeholder="用户名" name="username" type="text" id="username" autofocus>
+              </div>
+              <div class="form-group">
+                <input  class="form-control" placeholder="密码" name="password" type="password" id="password" value="">
+              </div>
+              <div class="checkbox" id="check">
+                <label>
+                  <input name="remember" type="checkbox" value="remember" id="cookiesave">记住我
+                </label>
+              </div>
+
+              <button type="button"  class="btn btn-lg btn-success btn-block" id="loginin"
+                      title="提示"
+                      data-container="body" data-toggle="popover" data-placement="bottom"
+                      data-content="">登录</button>
+
+
+              <!-- <a href="/page/main.jsp" class="btn btn-lg btn-success btn-block">登录</a> -->
+              <!-- <input type="submit" class="btn btn-lg btn-success btn-block" value="登录"> -->
+            </fieldset>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</body>
+
+</html>
+

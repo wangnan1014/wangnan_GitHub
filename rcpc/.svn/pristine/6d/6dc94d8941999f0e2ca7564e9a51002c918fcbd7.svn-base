@@ -1,0 +1,7 @@
+package com.heag.rcpc.service;
+
+import com.heag.rcpc.model.PcOptions;
+
+public interface IPcOptionsService {
+	String insertSelective(PcOptions po);
+}

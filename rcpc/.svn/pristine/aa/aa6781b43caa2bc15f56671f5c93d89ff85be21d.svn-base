@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd" default-autowire="byName">
+
+       <bean id="helloWorldAction" class="com.heag.HelloWorldAction" scope="prototype"></bean>
+       <bean id="loginAction" class="com.heag.rcpc.action.LoginAction" scope="prototype"></bean>
+	   <bean id="registerAction" class="com.heag.rcpc.action.RegisterAction" scope="prototype"></bean>
+	   <bean id="projectAction" class="com.heag.rcpc.action.ProjectAction" scope="prototype"></bean>
+	   <bean id="logAction" class="com.heag.rcpc.action.LogAction" scope="prototype"></bean>
+	   <bean id="toOutAction" class="com.heag.rcpc.action.ToOutAction" scope="prototype"></bean>
+       <bean id="mapReportAction" class="com.heag.rcpc.action.MapReportAction" scope="prototype"></bean>
+       <bean id="userAction" class="com.heag.rcpc.action.UserAction" scope="prototype"></bean>
+	   <!-- 360度评测 -->
+       <bean id="questionnaireAction" class="com.heag.rcpc.action.QuestionnaireAction" scope="prototype"></bean>
+       <bean id="evaluateAction" class="com.heag.rcpc.action.EvaluateAction" scope="prototype"></bean>
+ 	   <bean id="questionAction" class="com.heag.rcpc.action.QuestionAction" scope="prototype"></bean>	   
+       <bean id="sendInvitationsAction" class="com.heag.rcpc.action.SendInvitationsAction" scope="prototype"></bean>
+       <bean id="evaluateRelationAction" class="com.heag.rcpc.action.EvaluateRelationAction" scope="prototype"></bean>
+       <bean id="resultAction" class="com.heag.rcpc.action.ResultAction" scope="prototype"></bean>
+
+</beans> 

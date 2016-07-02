@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+       default-autowire="byName">
+
+
+       <bean id="webUserMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+              <property name="mapperInterface" value="com.heag.rcpc.mapper.WebUserMapper" />
+              <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+       </bean>
+
+       <bean id="rpLogMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+              <property name="mapperInterface" value="com.heag.rcpc.mapper.RpLogMapper" />
+              <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+       </bean>
+       <bean id="rpUserMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+              <property name="mapperInterface" value="com.heag.rcpc.mapper.RpUserMapper" />
+              <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+       </bean>
+       <bean id="rpCompanyMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+              <property name="mapperInterface" value="com.heag.rcpc.mapper.RpCompanyMapper" />
+              <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+       </bean>
+       <bean id="rpDepartmentMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+              <property name="mapperInterface" value="com.heag.rcpc.mapper.RpDepartmentMapper" />
+              <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+       </bean>       
+       <bean id="rpRoleMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+              <property name="mapperInterface" value="com.heag.rcpc.mapper.RpRoleMapper" />
+              <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+       </bean>
+       <bean id="rpProjectMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+              <property name="mapperInterface" value="com.heag.rcpc.mapper.RpProjectMapper" />
+              <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+       </bean>  
+       <bean id="rpIndustryMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+              <property name="mapperInterface" value="com.heag.rcpc.mapper.RpIndustryMapper" />
+              <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+       </bean> 
+       <bean id="rpProvinceMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+              <property name="mapperInterface" value="com.heag.rcpc.mapper.RpProvinceMapper" />
+              <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+       </bean> 
+       <bean id="rpRegionMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+              <property name="mapperInterface" value="com.heag.rcpc.mapper.RpRegionMapper" />
+              <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+       </bean>                      
+            
+ </beans>

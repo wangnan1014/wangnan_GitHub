@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+
+    <!-- <classPathEntry location="D:\Document_x64\Downloads\ojdbc14.jar"/>
+      <context id="ORATables" targetRuntime="MyBatis3">
+    <commentGenerator>
+        <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+    <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver" connectionURL="jdbc:oracle:thin:@178.19.60.55:1521:orcl" userId="user" password="pwd">
+       </jdbcConnection>
+    <javaTypeResolver>
+    <property name="forceBigDecimals" value="false"/>
+    </javaTypeResolver>
+    <javaModelGenerator targetPackage="com.maosheng.demo.model" targetProject="src\main\java">
+    <property name="enableSubPackages" value="false"/>
+    <property name="trimStrings" value="true"/>
+    </javaModelGenerator>
+    <sqlMapGenerator targetPackage="com.maosheng.demo.dao" targetProject="src\main\resources">
+    <property name="enableSubPackages" value="false"/>
+    </sqlMapGenerator>
+    <javaClientGenerator type="XMLMAPPER" targetPackage="com.maosheng.demo.dao" targetProject="src\main\java">
+    <property name="enableSubPackages" value="false"/>
+    </javaClientGenerator>
+    <table schema="dispatch_user" tableName="TEST1" domainObjectName="Test1" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+    <property name="useActualColumnNames" value="true"/>
+    </table>
+    <table schema="dispatch_user" tableName="TEST2" domainObjectName="Test2" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+    <property name="useActualColumnNames"   value="true"/>
+    </table>
+    </context>  -->
+<!-- 
+命令执行
+   java -jar mybatis-generator-core-x.x.x.jar -configfile generatorConfig.xml
+   java -jar mybatis-generator-core-x.x.x.jar -configfile generatorConfig.xml -overwrite
+   java -cp mybatis-generator-core-x.x.x.jar org.mybatis.generator.api.ShellRunner -configfile generatorConfig.xml
+   java -cp mybatis-generator-core-x.x.x.jar org.mybatis.generator.api.ShellRunner -configfile generatorConfig.xml -overwrite
+   java -jar E:\Workspaces\mybatis-generator-core-1.3.2.jar  -configfile E:\Workspaces\wn\rcpc\src\generatorConfig.xml
+ -->
+    <classPathEntry location="E:\work\apache-maven-3.3.3\repository\mysql\mysql-connector-java\5.1.25\mysql-connector-java-5.1.25.jar"/>
+    <context id="MysqlTables" targetRuntime="MyBatis3">
+        <commentGenerator>
+            <property name="suppressAllComments" value="false" />
+            <property name="suppressDate" value="true"/>
+        </commentGenerator>
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://10.0.10.107:3306/heagrcpc" userId="heagit" password="heagit">
+        </jdbcConnection>
+        <!-- 用来指定JDBC类型和Java类型如何转换 -->
+        <javaTypeResolver> 
+        	<!-- 控制是否强制DECIMAL和NUMERIC类型的字段转换为Java类型的 -->
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+        <javaModelGenerator targetPackage="com.heag.rcpc.model" targetProject="E:\Workspaces\wn\rcpc\src\">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <sqlMapGenerator targetPackage="sqlMap" targetProject="E:\Workspaces\wn\rcpc\src\">
+        <!-- MBG会根据catalog和schema来生成子包。如果false就会直接用targetPackage属性 -->
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+        <!-- 生成Mapper接口，所有的方法都在XML中，接口调用依赖XML文件。 -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.heag.rcpc.mapper" targetProject="E:\Workspaces\wn\rcpc\src\">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+		<table schema="heagrcpc" tableName="pc_askinfo" domainObjectName="PcAskinfo">
+			<property name="useActualColumnNames" value="false"/>		
+		</table>
+		<!-- 
+		<table schema="heagrcpc" tableName="pc_question" domainObjectName="PcQuestion">
+			<property name="useActualColumnNames" value="false"/>		
+		</table>
+		<table schema="heagrcpc" tableName="pc_options" domainObjectName="PcOptions">
+			<property name="useActualColumnNames" value="false"/>		
+		</table>
+		<table schema="heagrcpc" tableName="pc_result" domainObjectName="PcResult">
+			<property name="useActualColumnNames" value="false"/>		
+		</table>
+		<table schema="heagrcpc" tableName="pc_evaluate" domainObjectName="PcEvaluate">
+			<property name="useActualColumnNames" value="false"/>		
+		</table>
+		<table schema="heagrcpc" tableName="pc_evaluateRelation" domainObjectName="PcEvaluateRelation">
+			<property name="useActualColumnNames" value="false"/>		
+		</table>
+		-->			
+								
+     <!--   <table schema="heagreport" tableName="webuser" domainObjectName="WebUser">
+            <property name="useActualColumnNames" value="false"/>
+        </table> -->
+
+     <!--   <table schema="heagreport" tableName="rp_user" domainObjectName="RpUser">
+            <property name="useActualColumnNames" value="false"/>
+        </table>-->
+
+     <!--   <table schema="heagreport" tableName="rp_company" domainObjectName="RpCompany">
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+
+        <table schema="heagreport" tableName="rp_department" domainObjectName="RpDepartment">
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+
+        <table schema="heagreport" tableName="rp_log" domainObjectName="RpLog">
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+
+        <table schema="heagreport" tableName="rp_role" domainObjectName="RpRole">
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+
+        <table schema="heagreport" tableName="rp_permission" domainObjectName="RpPermission">
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+
+        <table schema="heagreport" tableName="rp_rolepermission" domainObjectName="RpRolePermission">
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+-->
+
+    </context>
+
+
+</generatorConfiguration>

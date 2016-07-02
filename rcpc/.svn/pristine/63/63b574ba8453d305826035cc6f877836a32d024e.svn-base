@@ -1,0 +1,320 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>营销数据列表</title>
+</head>
+<body>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">数据列表</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <button type="button" class="btn btn-primary" id="add" name="add">新增</button>
+                            <!-- 
+                            <button type="button" class="btn btn-primary" id="mod" name="mod">修改</button>
+                            <buttn type="button" class="btn btn-primary" id="see" name="see">查看</button>
+                             -->
+                            <button type="button" class="btn btn-primary" id="del" name="del">删除</button>                                                        
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="dataTable_wrapper">
+                               
+                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                    <thead>
+                                        <tr>
+                                            
+                                            <th> <input type="checkbox" id="pidCheck" name="pidCheck" value="-1" /> 序号</th>
+                                            <th>合同编号（内）</th>
+                                            <th>合同编号（外）</th>
+                                            <th>工程名称</th>
+                                            <th>操作</th>
+                                        </tr>
+                                    </thead>
+								    <tbody id ="dataList">
+  		
+								    </tbody>
+                                </table>
+                                
+                            </div>
+                            <!-- /.table-responsive -->
+
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+
+    <script src="../js/jquery.min.js"></script>
+    <!-- DataTables JavaScript -->
+    <script src="../js/jquery.dataTables.min.js"></script>
+    <script src="../js/dataTables.bootstrap.min.js"></script>
+
+
+    <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+    <script>
+    $(document).ready(function() {
+//				 		$.ajax({
+//					        type : "POST",
+//					        url : "../project/getDataList.action",
+//					        dataType : "json",
+//					        data : {},
+//					        error : function() {
+//					        	alert('页面加载出错，请联系相关人员')
+//					        },		
+//							success : function(data){
+//								alert("success")
+//							}
+//
+/**						})
+       var oTable =  $('#dataTables-example').DataTable({
+				"bServerSide": true,//开启此模式后，你对datatables的每个操作 每页显示多少条记录、下一页、上一页、排序（表头）、搜索，这些都会传给服务器相应的值。 
+				"bProcessing":true,	//开启读取服务器数据时显示正在加载中……特别是大数据量的时候，开启此功能比较好	    
+				"sDom": "<'row-fluid inboxHeader'<'span6'<'dt_actions'>l><'span6'f>r>t<'row-fluid inboxFooter'<'span6'i><'span6'p>>", //待补充
+				"sAjaxSource": "../project/getDataList.action?rand="+Math.random() , // //给服务器发请求的url 
+				"fnServerData": retrieveData, // 获取数据的处理函数
+				"sPaginationType": "full_numbers",	    			    		        
+                "responsive": true,
+                "bPaginate": true, //开关，是否显示分页器
+                "bInfo": true, //开关，是否显示表格的一些信息
+                "bFilter": true, //开关，是否启用客户端过滤器 
+                "aLengthMenu":[15, 30, 50, 80],//行数显示
+                "oLanguage": {
+                     "sProcessing": "正在加载中......",
+                     "sLengthMenu": "每页显示 _MENU_ 条记录",
+                     "sZeroRecords": "对不起，查询不到相关数据！",
+                     "sEmptyTable": "表中无数据存在！",
+                     "sInfo": "当前显示 _START_ 到 _END_ 条，共 _TOTAL_ 条记录",
+                     "sInfoFiltered": "数据表中共为 _MAX_ 条记录",
+                     "sSearch": "搜索:",
+                     "oPaginate": {
+	                        "sFirst": "首页",
+	                        "sPrevious": "上一页",
+	                        "sNext": "下一页",
+	                        "sLast": "末页"
+	                    }
+	             }, //多语言配置     
+
+			     "aoColumns":[
+			     	{"mData": 'iContractid'}, //mData 表示发请求时候本列的列明，返回的数据中相同下标名字的数据会填充到这一列
+                    {"mData": 'oContractid'},
+                    {"mData": 'projectname'},
+                    {"mData": 'month_count'},
+                    {"mData": 'pid'},
+                    {"mData": ''},
+                ],
+
+		        });	  
+ 
+ 	       // 3个参数的名字可以随便命名,但必须是3个参数,少一个都不行
+     function retrieveData( sSource,aoData, fnCallback ) {
+            $.ajax({
+                url : sSource ,//这个就是请求地址对应sAjaxSource
+                //data : {"aoData":JSON.stringify(aoData111)},//这个是把datatable的一些基本数据传给后台,比如起始位置,每页显示的行数
+                data:{},
+                type : 'post',
+                dataType : 'json',
+                async : false,
+                success : function(result) {
+                //var c = "{'aaData':[['Trident','Internet Explorer 4.0','Win 95+','4','X'],['Trident','Internet Explorer 5.0','Win 95+','5','C']}";
+                    var jsonobj=eval(result); 
+                  // fnCallback();//把返回的数据传给这个方法就可以了,datatable会自动绑定数据的
+					var a ="";
+					for(var i = 0;i<jsonobj.length;i++){
+						a+="<tr>";
+						a+="<td>"+jsonobj[i].pid+"</td>";
+						a+="<td>"+jsonobj[i].iContractid+"</td>";
+						a+="<td>"+jsonobj[i].iContractid+"</td>";
+						a+="<td>"+jsonobj[i].projectname+"</td>";
+						a+="<td>"+jsonobj[i].month_count+"</td>";
+						a+="<td>"+jsonobj[i].month_count+"</td>";
+						a+="</tr>";
+					}
+					if(a!=""){
+						document.getElementById("dataList").innerHTML=a;
+					}
+
+                },
+                error : function(msg) {
+                	alert('页面加载出错，请联系相关人员')
+                }
+            });
+        }	
+*/
+
+
+
+
+				var intidata =	initData();
+				
+				function initData(){	
+                $.ajax({
+                url : "../project/getDataList.action?rand="+Math.random() ,//这个就是请求地址对应sAjaxSource
+                data:{},
+                type : 'post',
+                dataType : 'json',
+                async : false,
+                success : function(result) {
+                var jsonobj=eval(result); 
+				$('#dataTables-example').DataTable({
+				//"bServerSide": true,//开启此模式后，你对datatables的每个操作 每页显示多少条记录、下一页、上一页、排序（表头）、搜索，这些都会传给服务器相应的值。-----一开就显示不了 ，不知为什么
+				//"sPaginationType": "full_numbers",//显示数字的翻页样式 
+			   	"bProcessing":true,	//开启读取服务器数据时显示正在加载中……特别是大数据量的时候，开启此功能比较好	    
+			    "bPaginate":true,
+			    //"aoColumnDefs": [{ "bVisible": false, "aTargets": [0]}]//隐藏列
+			    "bStateSave": true,
+			    data: jsonobj,
+			    columns: [
+			        { data: 'pid' },//隐藏 可在后面添加 "visible": false 逗号隔开
+			        { data: 'iContractid' },
+			        { data: 'oContractid' },
+			        { data: 'projectname' },
+					{ defaultContent: "<a id ='view' href='#' >查看</a>/<a  id ='edit' href='#'>修改</a>"},
+			    ],
+				"bAutoWidth": true,
+				"fnCreatedRow": function (nRow, aData, iDisplayIndex) {
+					var pid = $('td:eq(0)', nRow).text();
+					$('td:eq(0)', nRow).html(" &nbsp;&nbsp;<input class='pid'  id='pid' name='pid' value='"+ pid+"'  type ='checkbox'/> &nbsp; "+pid);
+				},	
+				"fnDrawCallback": function(){//绑定事件
+					//当click tr	
+					$('#dataTables-example tbody tr').dblclick( function () {
+						view();
+					});			
+					$('#view').click( function () {
+						view();
+					});
+					$('#edit').click( function () {
+						var nTds = $('td', this);
+						var sBrowser = $(nTds[0]).text();//序号
+						alert("序号:"+ sBrowser +" --修改--功能还没实现！" );
+					});	              	 
+					//复选框全选操作
+					$('#pidCheck').click( function (){
+					    if ($(this).is(":checked"))
+					   {
+
+						$("input[name='pid']").each(function() { //全选
+							$(this).prop("checked", true); 
+							addArr($(this));
+						});
+					   }else{
+						$("input[name='pid']").each(function() {//全不选中 
+							$(this).prop("checked", false); 
+							rmoveArr($(this));
+						});	
+					   }
+					});	
+					//复选框单条操作              	 
+					$("input[name='pid']").click( function () {
+						
+					    if ($(this).is(":checked")){
+							
+							addArr($(this));
+					   }else{
+							rmoveArr($(this));
+					   }
+					}); 				
+				},			    
+				"aoColumnDefs": [//和aoColums类似，但他可以给指定列附近爱属性
+                    {"bSortable": false, "aTargets": [0,4]},  //这句话意思是第5列（从0开始算） 不能排序
+                ],
+                "aaSorting": [[0, "desc"]], //默认排序 
+                "oLanguage": {
+                     "sProcessing": "正在加载中......",
+                     "sLengthMenu": "每页显示 _MENU_ 条记录",
+                     "sZeroRecords": "对不起，查询不到相关数据！",
+                     "sEmptyTable": "表中无数据存在！",
+                     "sInfo": "当前显示 _START_ 到 _END_ 条，共 _TOTAL_ 条",
+                     "sInfoFiltered": " (数据表中共有 _MAX_ 条记录)",
+                     "sSearch": "搜索：",
+                     "oPaginate": {
+	                        "sFirst": "首页",
+	                        "sPrevious": "上一页",
+	                        "sNext": "下一页",
+	                        "sLast": "末页"
+	                    }
+	             }, //多语言配置     			    
+              	 });
+                },
+                error : function(msg) {
+                	alert('页面加载出错，请联系相关人员')
+                }
+            });        	
+			};//--initData---
+			function view(){
+				var nTds = $('td', this);
+				var sBrowser = $(nTds[0]).text();//序号
+				alert("序号:"+ sBrowser +" --查看--功能还没实现！" );
+			}
+			$('#del').click( function () {
+				getCheckBoxVals();
+			if(checkBoxVals!=""){
+					if(confirm("你确信要删除数据？"))
+					{	
+	 					$.ajax({
+	 					url:"../project/deleteProject.action?rand="+Math.random(),
+		                data:{data:checkBoxVals},
+		                type : 'post',
+		                dataType : 'json',
+		                async : false,
+		                success : function(result) {
+		                
+		                	alert('删除成功');
+		                	//$('#dataTables-example').DataTable.Rows.Clear() 
+		                	//window.location.reload(); 
+		                	initData();
+		                }, 					
+		                error : function(msg) {
+		                	alert('页面删除出错，请联系相关人员')
+		                }
+	 					})				
+						
+					}else{
+	
+					}
+				}	
+			})	
+			//存放选中的复选框值
+			var checkBoxVals="";
+			var array= new Array();
+			//复选框值操作
+			function getCheckBoxVals(){
+				checkBoxVals = array.join(',');
+			}
+			function addArr(checkBox){
+				if(array.indexOf(checkBox.val())<0){
+					array.push(checkBox.val());			
+				}				
+			}
+			function rmoveArr(checkBox){
+				var index = array.indexOf(checkBox.val())
+				if(index>-1){
+					array.splice(index,1);
+				}
+			}	
+
+
+ });
+
+    </script>
+
+</body>
+
+</html>
+

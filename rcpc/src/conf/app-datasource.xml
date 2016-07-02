@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+        default-autowire="byName">
+
+       <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+              <property name="driverClass" value="com.mysql.jdbc.Driver"/>
+              <property name="jdbcUrl" value="jdbc:mysql://10.0.10.107:3306/heagrcpc"/>
+              <property name="user" value="heagit"/>
+              <property name="password" value="heagit"/>
+              <property name="idleConnectionTestPeriod" value="18000"/>
+       </bean>
+
+ <!--      <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+              <property name="dataSource" ref="dataSource" />
+       </bean>-->
+
+</beans> 

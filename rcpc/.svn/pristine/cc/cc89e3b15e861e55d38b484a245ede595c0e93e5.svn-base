@@ -1,0 +1,48 @@
+package com.heag.rcpc.service.impl;
+
+import java.util.Date;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.heag.rcpc.dao.IPcResultDao;
+import com.heag.rcpc.dao.impl.PcResultDaoImpl;
+import com.heag.rcpc.model.PcResult;
+import com.heag.rcpc.model.PcResultExample;
+import com.heag.rcpc.model.PcResultExample.Criteria;
+import com.heag.rcpc.service.IPcResultService;
+import com.heag.rcpc.util.ConstantsUtil;
+
+public class PcResultServiceImpl implements IPcResultService {
+	@Autowired
+	private IPcResultDao  pcResultDao;
+	public String insertSelective(Integer aid, Integer eid, Integer id,String evaluator,String[] qidVals, Map map) {
+		int qidLen = qidVals.length;
+		String result ="0";
+			for(int i=0;i<qidLen;i++){
+				PcResult pr = new PcResult();
+				pr.setAid(aid);
+				pr.setEid(eid);
+				pr.setId(id);
+				pr.setAid(aid);
+				pr.setEvaluator(evaluator);
+				pr.setQid(new Integer(qidVals[i]));
+				pr.setRresult(((String[]) map.get("qid_"+qidVals[i]))[0]);
+				pr.setIsdelete(ConstantsUtil.NOTDELETED);
+				pr.setCreatedate(new Date());
+				result = pcResultDao.insertSelective(pr);
+			}
+
+		return result;
+	}
+	public int countByExample(Integer aid, Integer eid, Integer id,
+			String evaluator) {
+		PcResultExample pre= new PcResultExample();
+		Criteria criteria = pre.createCriteria();
+		criteria.andAidEqualTo(aid);
+		criteria.andAidEqualTo(eid);
+		criteria.andAidEqualTo(id);
+		return pcResultDao.countByExample(pre);
+	}
+
+}

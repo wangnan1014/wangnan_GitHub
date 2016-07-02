@@ -1,0 +1,39 @@
+package com.heag.rcpc.action;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.log4j.Logger;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.opensymphony.xwork2.ActionSupport;
+
+
+public class QuestionnaireAction extends ActionSupport {
+	private static final Logger logger=Logger.getLogger("report.debug");
+
+	@Override
+	public String execute() throws Exception {
+		// TODO Auto-generated method stub
+		return SUCCESS;
+	}
+	public @ResponseBody List getDataList() throws Exception {
+		ArrayList arr = new ArrayList();
+		return arr;
+	}
+	
+	public String addAskInfo() throws Exception {
+		return "add";
+	}
+	@ResponseBody
+	public String EditAskInfo() throws Exception {
+		
+		
+		return "Edit";
+	}
+	@ResponseBody
+	public String deleteAskInfo() throws Exception {
+
+		return "delete";
+	}	
+}

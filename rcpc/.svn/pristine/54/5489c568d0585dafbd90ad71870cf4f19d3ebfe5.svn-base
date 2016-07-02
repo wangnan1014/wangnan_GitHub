@@ -1,0 +1,262 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: Administrator
+  Date: 2015-6-23 0023
+  Time: 14:36:15
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>华仪电气营销数据系统</title>
+
+  <!-- Bootstrap Core CSS -->
+  <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- MetisMenu CSS -->
+  <link href="../css/metisMenu.min.css" rel="stylesheet">
+
+  <!-- Timeline CSS -->
+  <!--  <link href="../dist/css/timeline.css" rel="stylesheet"> -->
+
+  <!-- Custom CSS -->
+  <link href="../css/heagreport.css" rel="stylesheet">
+
+  <!-- Morris Charts CSS -->
+  <!--  <link href="../bower_components/morrisjs/morris.css" rel="stylesheet"> -->
+
+  <!-- Custom Fonts -->
+  <link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+<!--  <link href="../css/SyntaxHighlighter.css" rel="stylesheet" type="text/css" >  -->
+
+
+  <!-- jQuery -->
+  <script src="../js/jquery.min.js"></script>
+
+  <!-- Bootstrap Core JavaScript -->
+  <script src="../js/bootstrap.min.js"></script>
+
+  <!-- Metis Menu Plugin JavaScript -->
+  <script src="../js/metisMenu.min.js"></script>
+
+  <!-- Morris Charts JavaScript -->
+  <!--<script src="../bower_components/raphael/raphael-min.js"></script>
+  <script src="../bower_components/morrisjs/morris.min.js"></script>
+  <script src="../js/morris-data.js"></script> -->
+
+  <script type="text/javascript" src="../js/map/raphael-min.js"></script>
+  <script type="text/javascript" src="../js/map/chinaMapConfig.js"></script>
+  <script type="text/javascript" src="../js/map/map.js"></script>
+
+<!--  <script type="text/javascript" src="../js/map/SyntaxHighlighter.js"></script>  -->
+
+  <!-- Custom Theme JavaScript -->
+  <script src="../js/menu.js"></script>
+
+
+  <script type="text/javascript">
+  	var region = {"华北地区":["北京","天津","河北","山西","内蒙古"],"东北地区":["辽宁","吉林","黑龙江"],"华东地区":["上海","江苏","浙江","安徽","福建","江西","山东"],"中南地区":["河南","湖北","湖南","广东","广西","海南"],"西南地区":["重庆","四川","贵州","云南","西藏"],"西北地区":["陕西","甘肃","青海","宁夏","新疆"]};
+    var nameData = {"黑龙江":"heilongjiang", "吉林":"jilin", "辽宁":"liaoning", "河北":"hebei", "山东":"shandong", "江苏":"jiangsu", "浙江":"zhejiang", "安徽":"anhui", "河南":"henan", "山西":"shanxi", "陕西":"shaanxi", "甘肃":"gansu", "湖北":"hubei", "江西":"jiangxi", "福建":"fujian", "湖南":"hunan", "贵州":"guizhou", "四川":"sichuan", "云南":"yunnan", "青海":"qinghai", "海南":"hainan", "上海":"shanghai", "重庆":"chongqing", "天津":"tianjin", "北京":"beijing", "宁夏":"ningxia", "内蒙古":"neimenggu", "广西":"guangxi", "新疆":"xinjiang", "西藏":"xizang", "广东":"guangdong", "香港":"xianggang", "台湾":"taiwan", "澳门":"aomen"}
+    var json = eval(region);
+    var v_arr = new Array();
+    $(function() {
+    	var typeName = 0;
+    	$(".typeName").click(function(){//0区域：1：省
+    		
+    		$(this).prop("checked", true);
+    		typeName=$(this).val();
+    		allFillColor(1);
+    	})
+      // 默认
+      var mObj = $('#ChinaMap').SVGMap({
+        mapName: 'china',
+        mapWidth: 600,
+        mapHeight:500,
+        showTip:true,
+        external: true,
+    	clickColorChange: true, 
+   		clickCallback: function(stateData, obj){
+   			if(typeName == 0){
+				compareMapNames(obj,3);
+			}else if(typeName == 1){
+				v_arr.push(obj.id);
+			}
+	    }, 
+ 	    unClickCallback: function(stateData, obj){
+ 	    	if(typeName == 0){
+       			compareMapNames(obj,4)
+       		}else if(typeName == 1){
+       			v_arr.remove(obj.id);
+       		}
+   		},
+	    hoverCallback: function(stateData, obj){ 
+	       
+	    },
+      });
+      $("#all-select").click(function(){
+      	allFillColor(0);
+      });
+      $("#no-select").click(function(){
+      	allFillColor(1);
+      }); 
+      $("#reverse-select").click(function(){
+      	allFillColor(2);
+      });                
+      //0全选    1 重置  2 反选
+      function  allFillColor(lock){
+ 		$.each(region,function(cc){
+			 fillColors(region[cc],lock );		
+ 		})
+      }      
+      //根据省份选区域 
+      function  compareMapNames(obj, lock ){
+     	 for(x in region){
+			 for(y in region[x]){
+				if(region[x][y]==obj.name){
+					fillColors(region[x],lock );
+					return false;
+				}
+	 		 }
+		 }
+      }
+      //0全选    1 重置  2 反选 3 区域选中 4区域撤销选中
+      function fillColors(fillNames, lock ){
+      	 if( lock == 0){//all select
+      	 	 $.each(fillNames,function(index){
+      	 		var fillName =  nameData[fillNames[index]];
+      	 		var fno = mObj.externalData[fillName];
+      	 		fno.attr({fill: '#EC971F'});
+      	 		fno['eventHoverLock'] = true; 
+      	 		mObj.options.clickedRegion.push(fno.id);
+      	 		v_arr.push(fno.id);
+      	 	})
+      	 }else if(lock == 1){// 重置
+      	     $.each(fillNames,function(index){
+      	   		var fillName =  nameData[fillNames[index]];
+      	 		var fno = mObj.externalData[fillName];
+      	 		fno.attr({fill: '#AAD5FF'});
+      	 		fno['eventHoverLock'] = false; 
+      	 		mObj.options.clickedRegion.remove(fno.id);
+      	 		v_arr.remove(fno.id);
+      	 	})
+      	 }else if(lock == 2){//反选
+      	     $.each(fillNames,function(index){
+      	   		var fillName =  nameData[fillNames[index]];
+      	   		var fno = mObj.externalData[fillName];
+      	 		if(fno.attr("fill")=="#EC971F"){
+      	 			fno.attr({fill: '#AAD5FF'});
+	      	 		fno['eventHoverLock'] = false; 
+      	 			mObj.options.clickedRegion.remove(fno.id);
+      	 			v_arr.remove(fno.id);
+      	 		}else if(fno.attr("fill")=="#AAD5FF"){
+	      	 		fno.attr({fill: '#EC971F'});
+	      	 		fno['eventHoverLock'] = true; 
+      	 			mObj.options.clickedRegion.push(fno.id);
+      	 			v_arr.remove(fno.id);   	 			
+      	 		}
+      	 	})      	 
+      	 }else if(lock == 3){//区域选中
+	      	  $.each(fillNames,function(index){ 
+      	   		var fillName =  nameData[fillNames[index]];
+      	   		var fno = mObj.externalData[fillName];      
+				fno.attr({fill: '#EC971F'});
+      	 		fno['eventHoverLock'] = true; 
+     	 		mObj.options.clickedRegion.push(fno.id);
+     	 		v_arr.push(fno.id);      	   		    	
+	          })   
+      	 }else if(lock == 4){//区域撤销选中
+	      	  $.each(fillNames,function(index){ 
+      	   		var fillName =  nameData[fillNames[index]];
+      	   		var fno = mObj.externalData[fillName]; 
+      	 		fno.attr({fill: '#AAD5FF'});
+      	 		fno['eventHoverLock'] = false; 
+     	 		mObj.options.clickedRegion.remove(fno.id);
+     	 		v_arr.remove(fno.id);       	   		 	          	
+	          })   
+      	 }
+      }
+      $("#show_data").click(function(){
+      alert(v_arr);
+      	if(v_arr.length>0){
+		 $.ajax({
+			   type: 'POST', 
+			   url:"/mapReport/getProjectReport.action",
+			   data: v_arr,
+			   dataType: "json",
+			   async:false,
+			   success : function(d){
+				if(!d){
+				}else{
+					alert("读取"+d)
+				}
+			   },
+			   error:function(d){
+			   	   alert("数据错误，请联系相关人员！")
+			   }
+		 });	      	
+		}	
+      })
+      
+    });
+
+      </script>
+</head>
+
+<body>
+
+<div id="wrapper">
+
+  <%@ include file="menu.jsp"%>
+
+
+  <div id="page-wrapper">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-12">
+        	 <hr/>
+        	 <button type="button" class="btn   btn-primary btn-sm" id="all-select"> 全选
+    		 </button>
+             <button type="button" class="btn   btn-primary btn-sm" id="no-select"> 重置
+    		 </button>    		 
+              <button type="button" class="btn   btn-primary btn-sm" id="reverse-select"> 反选
+    		 </button>        
+        	<hr/>
+          <h1 class="page-header">欢迎！</h1>
+          	 查询模式：区域 <input id="typeName" name="typeName" class="typeName"  type="radio" value="0" checked/> 省 <input id="typeName" name="typeName" class="typeName" value="1" type="radio"/> 
+        </div>
+        <!-- /.col-lg-12 -->
+
+
+        <div id="ChinaMap"></div>
+ 		 <div id="dataShow" align="right">
+			 <button type="button" class="btn   btn-primary btn-sm" id="show_data"> 查询
+    		 </button> 		 
+ 		 </div>
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </div>
+  <!-- /#page-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+
+
+
+</body>
+
+</html>
+
+

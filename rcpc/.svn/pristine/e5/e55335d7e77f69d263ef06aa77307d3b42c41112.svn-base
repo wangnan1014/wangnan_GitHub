@@ -1,0 +1,58 @@
+package com.heag.rcpc.service.impl;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.heag.rcpc.dao.IPcEvaluateRelationDao;
+import com.heag.rcpc.model.PcEvaluateRelation;
+import com.heag.rcpc.model.PcEvaluateRelationExample;
+import com.heag.rcpc.model.PcEvaluateRelationExample.Criteria;
+import com.heag.rcpc.service.IPcEvaluateRelationService;
+
+public class PcEvaluateRelationServiceImpl implements
+		IPcEvaluateRelationService {
+
+	public String insertSelective(PcEvaluateRelation per) {
+		// TODO Auto-generated method stub
+		return pcEvaluateRelationDao.insertSelective(per);
+	}
+
+	public ArrayList<PcEvaluateRelation> selectByExample(PcEvaluateRelationExample pere) {
+		// TODO Auto-generated method stub
+		return pcEvaluateRelationDao.selectByExample(pere);
+	}
+
+	public int updateByExampleSelective(PcEvaluateRelation per,PcEvaluateRelationExample pere) {
+		// TODO Auto-generated method stub
+		return pcEvaluateRelationDao.updateByExampleSelective(per,pere);
+	}
+
+	public int updateByPrimaryKeySelective(PcEvaluateRelation per) {
+		// TODO Auto-generated method stub
+		return pcEvaluateRelationDao.updateByPrimaryKeySelective(per);
+	}
+	
+	@Autowired
+	private IPcEvaluateRelationDao pcEvaluateRelationDao;
+	
+	public int countByExample(Integer aid, Integer eid, Integer id,
+		String evaluator) {
+		PcEvaluateRelationExample pae = new PcEvaluateRelationExample(); 
+		Criteria criteria = pae.createCriteria();
+		criteria.andAidEqualTo(aid);
+		criteria.andEidEqualTo(eid);
+		criteria.andIdEqualTo(id);
+		criteria.andCompletestatusEqualTo("0");
+		return pcEvaluateRelationDao.countByExample(pae);
+	}
+
+	public List<Map<String, String>> selectEvaluateAndEvaluateRelationByAid(
+			Integer aid) {
+		// TODO Auto-generated method stub
+		return pcEvaluateRelationDao.selectEvaluateAndEvaluateRelationByAid(aid);
+	}
+
+}

@@ -1,0 +1,808 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.heag.rcpc.mapper.RpProjectMapper" >
+  <resultMap id="BaseResultMap" type="com.heag.rcpc.model.RpProject" >
+    <id column="pid" property="pid" jdbcType="INTEGER" />
+    <result column="i_contractid" property="iContractid" jdbcType="VARCHAR" />
+    <result column="o_contractid" property="oContractid" jdbcType="VARCHAR" />
+    <result column="signdate" property="signdate" jdbcType="TIMESTAMP" />
+    <result column="techdate" property="techdate" jdbcType="TIMESTAMP" />
+    <result column="buycorp" property="buycorp" jdbcType="VARCHAR" />
+    <result column="buyno" property="buyno" jdbcType="VARCHAR" />
+    <result column="custname" property="custname" jdbcType="VARCHAR" />
+    <result column="projectname" property="projectname" jdbcType="VARCHAR" />
+    <result column="itypeid" property="itypeid" jdbcType="INTEGER" />
+    <result column="itypename" property="itypename" jdbcType="VARCHAR" />
+    <result column="regionid" property="regionid" jdbcType="INTEGER" />
+    <result column="region" property="region" jdbcType="VARCHAR" />
+    <result column="provinceid" property="provinceid" jdbcType="INTEGER" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="channel" property="channel" jdbcType="VARCHAR" />
+    <result column="salesman" property="salesman" jdbcType="VARCHAR" />
+    <result column="productid" property="productid" jdbcType="INTEGER" />
+    <result column="productname" property="productname" jdbcType="VARCHAR" />
+    <result column="model" property="model" jdbcType="VARCHAR" />
+    <result column="danwei" property="danwei" jdbcType="VARCHAR" />
+    <result column="count" property="count" jdbcType="DOUBLE" />
+    <result column="price" property="price" jdbcType="DOUBLE" />
+    <result column="realprice" property="realprice" jdbcType="DOUBLE" />
+    <result column="contractprice" property="contractprice" jdbcType="DOUBLE" />
+    <result column="totalprice" property="totalprice" jdbcType="DOUBLE" />
+    <result column="offerprice" property="offerprice" jdbcType="DOUBLE" />
+    <result column="deptid" property="deptid" jdbcType="INTEGER" />
+    <result column="deptname" property="deptname" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="refunds" property="refunds" jdbcType="DOUBLE" />
+    <result column="refundsdate" property="refundsdate" jdbcType="TIMESTAMP" />
+    <result column="isinvoice" property="isinvoice" jdbcType="TINYINT" />
+    <result column="invoicecount" property="invoicecount" jdbcType="DOUBLE" />
+    <result column="invoicedate" property="invoicedate" jdbcType="TIMESTAMP" />
+    <result column="supplytype" property="supplytype" jdbcType="VARCHAR" />
+    <result column="isdelete" property="isdelete" jdbcType="TINYINT" />
+    <result column="createdate" property="createdate" jdbcType="TIMESTAMP" />
+    <result column="updatedate" property="updatedate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    pid, i_contractid, o_contractid, signdate, techdate, buycorp, buyno, custname, projectname, 
+    itypeid, itypename, regionid, region, provinceid, province, channel, salesman, productid, 
+    productname, model, danwei, count, price, realprice, contractprice, totalprice, offerprice, 
+    deptid, deptname, status, refunds, refundsdate, isinvoice, invoicecount, invoicedate, 
+    supplytype, isdelete, createdate, updatedate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.heag.rcpc.model.RpProjectExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from rp_project
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from rp_project
+    where pid = #{pid,jdbcType=INTEGER}
+  </select>
+  <select id="select" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    pid,o_contractid,projectname,signdate,custname ,region,province , itypename ,
+    channel ,  
+    status ,  
+    isinvoice
+    from rp_project 
+    where isdelete=0 
+  </select>  
+  <select id="selectProjectMapReport" resultType="map" parameterType="map" >
+	SELECT a,ROUND(IFNULL(invoicecount,0),2) invoicecount,ROUND(IFNULL(refunds,0),2) refunds,ROUND(IFNULL(contractprice,0),2) contractprice FROM  (
+	 (SELECT  
+	 <if test="typeName!=null and typeName=='region' "> 
+	     region
+	 </if>
+	 <if test="typeName!=null and typeName=='province' "> 
+		 provincename
+	 </if>
+	  a FROM rp_${typeName} where isdelete=0) as rp_${typeName}  LEFT JOIN 
+	 (SELECT ${typeName}  AS a, SUM(invoicecount) invoicecount  FROM rp_project
+	 WHERE invoicedate &gt;=#{startDate} AND invoicedate &lt;=#{endDate}  AND province IN   
+	 		 <foreach item="item" index="index" collection="v_arr" open="(" separator="," close=")">  
+		  		#{item}  
+			 </foreach>
+	 and  isdelete=0 GROUP BY ${typeName} ) AS invoicecount USING(a) LEFT JOIN 
+	 (SELECT ${typeName}  AS a, SUM(contractprice) contractprice FROM rp_project
+	 WHERE signdate &gt;=#{startDate} AND signdate &lt;=#{endDate}   AND province IN   
+	 		 <foreach item="item" index="index" collection="v_arr" open="(" separator="," close=")">  
+		  		#{item}  
+			 </foreach>
+	 and  isdelete=0  GROUP BY ${typeName} ) AS contractprice USING(a) LEFT JOIN 
+	 (SELECT ${typeName}  AS a, SUM(refunds) refunds FROM rp_project
+	 WHERE refundsdate &gt;=#{startDate} AND refundsdate &lt;=#{endDate}  AND province IN   
+	 		 <foreach item="item" index="index" collection="v_arr" open="(" separator="," close=")">  
+		  		#{item}  
+			 </foreach>
+	 and  isdelete=0  GROUP BY ${typeName} ) AS refunds  USING(a)
+	 )  WHERE  invoicecount IS NOT NULL OR refunds IS NOT NULL OR contractprice IS NOT NULL
+  </select>    
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from rp_project
+    where pid = #{pid,jdbcType=INTEGER}
+  </delete>
+
+  <delete id="deleteByExample" parameterType="com.heag.rcpc.model.RpProjectExample" >
+    delete from rp_project
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.heag.rcpc.model.RpProject" >
+    insert into rp_project (pid, i_contractid, o_contractid, 
+      signdate, techdate, buycorp, 
+      buyno, custname, projectname, 
+      itypeid, itypename, regionid, 
+      region, provinceid, province, 
+      channel, salesman, productid, 
+      productname, model, danwei, 
+      count, price, realprice, contractprice, 
+      totalprice, offerprice, deptid, 
+      deptname, status, refunds, 
+      refundsdate, isinvoice, invoicecount, 
+      invoicedate, supplytype, isdelete, 
+      createdate, updatedate)
+    values (#{pid,jdbcType=INTEGER}, #{iContractid,jdbcType=VARCHAR}, #{oContractid,jdbcType=VARCHAR}, 
+      #{signdate,jdbcType=TIMESTAMP}, #{techdate,jdbcType=TIMESTAMP}, #{buycorp,jdbcType=VARCHAR}, 
+      #{buyno,jdbcType=VARCHAR}, #{custname,jdbcType=VARCHAR}, #{projectname,jdbcType=VARCHAR}, 
+      #{itypeid,jdbcType=INTEGER}, #{itypename,jdbcType=VARCHAR}, #{regionid,jdbcType=INTEGER}, 
+      #{region,jdbcType=VARCHAR}, #{provinceid,jdbcType=INTEGER}, #{province,jdbcType=VARCHAR}, 
+      #{channel,jdbcType=VARCHAR}, #{salesman,jdbcType=VARCHAR}, #{productid,jdbcType=INTEGER}, 
+      #{productname,jdbcType=VARCHAR}, #{model,jdbcType=VARCHAR}, #{danwei,jdbcType=VARCHAR}, 
+      #{count,jdbcType=DOUBLE}, #{price,jdbcType=DOUBLE}, #{realprice,jdbcType=DOUBLE}, #{contractprice,jdbcType=DOUBLE},
+      #{totalprice,jdbcType=DOUBLE}, #{offerprice,jdbcType=DOUBLE}, #{deptid,jdbcType=INTEGER},
+      #{deptname,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{refunds,jdbcType=DOUBLE},
+      #{refundsdate,jdbcType=TIMESTAMP}, #{isinvoice,jdbcType=TINYINT}, #{invoicecount,jdbcType=DOUBLE},
+      #{invoicedate,jdbcType=TIMESTAMP}, #{supplytype,jdbcType=VARCHAR}, #{isdelete,jdbcType=TINYINT}, 
+      #{createdate,jdbcType=TIMESTAMP}, #{updatedate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.heag.rcpc.model.RpProject"  useGeneratedKeys="true"  keyProperty="pid">
+    insert into rp_project
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pid != null" >
+        pid,
+      </if>
+      <if test="iContractid != null" >
+        i_contractid,
+      </if>
+      <if test="oContractid != null" >
+        o_contractid,
+      </if>
+      <if test="signdate != null" >
+        signdate,
+      </if>
+      <if test="techdate != null" >
+        techdate,
+      </if>
+      <if test="buycorp != null" >
+        buycorp,
+      </if>
+      <if test="buyno != null" >
+        buyno,
+      </if>
+      <if test="custname != null" >
+        custname,
+      </if>
+      <if test="projectname != null" >
+        projectname,
+      </if>
+      <if test="itypeid != null" >
+        itypeid,
+      </if>
+      <if test="itypename != null" >
+        itypename,
+      </if>
+      <if test="regionid != null" >
+        regionid,
+      </if>
+      <if test="region != null" >
+        region,
+      </if>
+      <if test="provinceid != null" >
+        provinceid,
+      </if>
+      <if test="province != null" >
+        province,
+      </if>
+      <if test="channel != null" >
+        channel,
+      </if>
+      <if test="salesman != null" >
+        salesman,
+      </if>
+      <if test="productid != null" >
+        productid,
+      </if>
+      <if test="productname != null" >
+        productname,
+      </if>
+      <if test="model != null" >
+        model,
+      </if>
+      <if test="danwei != null" >
+        danwei,
+      </if>
+      <if test="count != null" >
+        count,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="realprice != null" >
+        realprice,
+      </if>
+      <if test="contractprice != null" >
+        contractprice,
+      </if>
+      <if test="totalprice != null" >
+        totalprice,
+      </if>
+      <if test="offerprice != null" >
+        offerprice,
+      </if>
+      <if test="deptid != null" >
+        deptid,
+      </if>
+      <if test="deptname != null" >
+        deptname,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="refunds != null" >
+        refunds,
+      </if>
+      <if test="refundsdate != null" >
+        refundsdate,
+      </if>
+      <if test="isinvoice != null" >
+        isinvoice,
+      </if>
+      <if test="invoicecount != null" >
+        invoicecount,
+      </if>
+      <if test="invoicedate != null" >
+        invoicedate,
+      </if>
+      <if test="supplytype != null" >
+        supplytype,
+      </if>
+      <if test="isdelete != null" >
+        isdelete,
+      </if>
+      <if test="createdate != null" >
+        createdate,
+      </if>
+      <if test="updatedate != null" >
+        updatedate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pid != null" >
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="iContractid != null" >
+        #{iContractid,jdbcType=VARCHAR},
+      </if>
+      <if test="oContractid != null" >
+        #{oContractid,jdbcType=VARCHAR},
+      </if>
+      <if test="signdate != null" >
+        #{signdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="techdate != null" >
+        #{techdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="buycorp != null" >
+        #{buycorp,jdbcType=VARCHAR},
+      </if>
+      <if test="buyno != null" >
+        #{buyno,jdbcType=VARCHAR},
+      </if>
+      <if test="custname != null" >
+        #{custname,jdbcType=VARCHAR},
+      </if>
+      <if test="projectname != null" >
+        #{projectname,jdbcType=VARCHAR},
+      </if>
+      <if test="itypeid != null" >
+        #{itypeid,jdbcType=INTEGER},
+      </if>
+      <if test="itypename != null" >
+        #{itypename,jdbcType=VARCHAR},
+      </if>
+      <if test="regionid != null" >
+        #{regionid,jdbcType=INTEGER},
+      </if>
+      <if test="region != null" >
+        #{region,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceid != null" >
+        #{provinceid,jdbcType=INTEGER},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="channel != null" >
+        #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="salesman != null" >
+        #{salesman,jdbcType=VARCHAR},
+      </if>
+      <if test="productid != null" >
+        #{productid,jdbcType=INTEGER},
+      </if>
+      <if test="productname != null" >
+        #{productname,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null" >
+        #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="danwei != null" >
+        #{danwei,jdbcType=VARCHAR},
+      </if>
+      <if test="count != null" >
+        #{count,jdbcType=DOUBLE},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="realprice != null" >
+        #{realprice,jdbcType=DOUBLE},
+      </if>
+      <if test="contractprice != null" >
+        #{contractprice,jdbcType=DOUBLE},
+      </if>
+      <if test="totalprice != null" >
+        #{totalprice,jdbcType=DOUBLE},
+      </if>
+      <if test="offerprice != null" >
+        #{offerprice,jdbcType=DOUBLE},
+      </if>
+      <if test="deptid != null" >
+        #{deptid,jdbcType=INTEGER},
+      </if>
+      <if test="deptname != null" >
+        #{deptname,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="refunds != null" >
+        #{refunds,jdbcType=DOUBLE},
+      </if>
+      <if test="refundsdate != null" >
+        #{refundsdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isinvoice != null" >
+        #{isinvoice,jdbcType=TINYINT},
+      </if>
+      <if test="invoicecount != null" >
+        #{invoicecount,jdbcType=DOUBLE},
+      </if>
+      <if test="invoicedate != null" >
+        #{invoicedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="supplytype != null" >
+        #{supplytype,jdbcType=VARCHAR},
+      </if>
+      <if test="isdelete != null" >
+        #{isdelete,jdbcType=TINYINT},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedate != null" >
+        #{updatedate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.heag.rcpc.model.RpProjectExample" resultType="java.lang.Integer" >
+    select count(*) from rp_project
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update rp_project
+    <set >
+      <if test="record.pid != null" >
+        pid = #{record.pid,jdbcType=INTEGER},
+      </if>
+      <if test="record.iContractid != null" >
+        i_contractid = #{record.iContractid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.oContractid != null" >
+        o_contractid = #{record.oContractid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.signdate != null" >
+        signdate = #{record.signdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.techdate != null" >
+        techdate = #{record.techdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.buycorp != null" >
+        buycorp = #{record.buycorp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buyno != null" >
+        buyno = #{record.buyno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custname != null" >
+        custname = #{record.custname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.projectname != null" >
+        projectname = #{record.projectname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itypeid != null" >
+        itypeid = #{record.itypeid,jdbcType=INTEGER},
+      </if>
+      <if test="record.itypename != null" >
+        itypename = #{record.itypename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.regionid != null" >
+        regionid = #{record.regionid,jdbcType=INTEGER},
+      </if>
+      <if test="record.region != null" >
+        region = #{record.region,jdbcType=VARCHAR},
+      </if>
+      <if test="record.provinceid != null" >
+        provinceid = #{record.provinceid,jdbcType=INTEGER},
+      </if>
+      <if test="record.province != null" >
+        province = #{record.province,jdbcType=VARCHAR},
+      </if>
+      <if test="record.channel != null" >
+        channel = #{record.channel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.salesman != null" >
+        salesman = #{record.salesman,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productid != null" >
+        productid = #{record.productid,jdbcType=INTEGER},
+      </if>
+      <if test="record.productname != null" >
+        productname = #{record.productname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.model != null" >
+        model = #{record.model,jdbcType=VARCHAR},
+      </if>
+      <if test="record.danwei != null" >
+        danwei = #{record.danwei,jdbcType=VARCHAR},
+      </if>
+      <if test="record.count != null" >
+        count = #{record.count,jdbcType=DOUBLE},
+      </if>
+      <if test="record.price != null" >
+        price = #{record.price,jdbcType=DOUBLE},
+      </if>
+      <if test="record.realprice != null" >
+        realprice = #{record.realprice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.contractprice != null" >
+        contractprice = #{record.contractprice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.totalprice != null" >
+        totalprice = #{record.totalprice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.offerprice != null" >
+        offerprice = #{record.offerprice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.deptid != null" >
+        deptid = #{record.deptid,jdbcType=INTEGER},
+      </if>
+      <if test="record.deptname != null" >
+        deptname = #{record.deptname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.refunds != null" >
+        refunds = #{record.refunds,jdbcType=DOUBLE},
+      </if>
+      <if test="record.refundsdate != null" >
+        refundsdate = #{record.refundsdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isinvoice != null" >
+        isinvoice = #{record.isinvoice,jdbcType=TINYINT},
+      </if>
+      <if test="record.invoicecount != null" >
+        invoicecount = #{record.invoicecount,jdbcType=DOUBLE},
+      </if>
+      <if test="record.invoicedate != null" >
+        invoicedate = #{record.invoicedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.supplytype != null" >
+        supplytype = #{record.supplytype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isdelete != null" >
+        isdelete = #{record.isdelete,jdbcType=TINYINT},
+      </if>
+      <if test="record.createdate != null" >
+        createdate = #{record.createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatedate != null" >
+        updatedate = #{record.updatedate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update rp_project
+    set pid = #{record.pid,jdbcType=INTEGER},
+      i_contractid = #{record.iContractid,jdbcType=VARCHAR},
+      o_contractid = #{record.oContractid,jdbcType=VARCHAR},
+      signdate = #{record.signdate,jdbcType=TIMESTAMP},
+      techdate = #{record.techdate,jdbcType=TIMESTAMP},
+      buycorp = #{record.buycorp,jdbcType=VARCHAR},
+      buyno = #{record.buyno,jdbcType=VARCHAR},
+      custname = #{record.custname,jdbcType=VARCHAR},
+      projectname = #{record.projectname,jdbcType=VARCHAR},
+      itypeid = #{record.itypeid,jdbcType=INTEGER},
+      itypename = #{record.itypename,jdbcType=VARCHAR},
+      regionid = #{record.regionid,jdbcType=INTEGER},
+      region = #{record.region,jdbcType=VARCHAR},
+      provinceid = #{record.provinceid,jdbcType=INTEGER},
+      province = #{record.province,jdbcType=VARCHAR},
+      channel = #{record.channel,jdbcType=VARCHAR},
+      salesman = #{record.salesman,jdbcType=VARCHAR},
+      productid = #{record.productid,jdbcType=INTEGER},
+      productname = #{record.productname,jdbcType=VARCHAR},
+      model = #{record.model,jdbcType=VARCHAR},
+      danwei = #{record.danwei,jdbcType=VARCHAR},
+      count = #{record.count,jdbcType=DOUBLE},
+      price = #{record.price,jdbcType=DOUBLE},
+      realprice = #{record.realprice,jdbcType=DOUBLE},
+      contractprice = #{record.contractprice,jdbcType=DOUBLE},
+      totalprice = #{record.totalprice,jdbcType=DOUBLE},
+      offerprice = #{record.offerprice,jdbcType=DOUBLE},
+      deptid = #{record.deptid,jdbcType=INTEGER},
+      deptname = #{record.deptname,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR},
+      refunds = #{record.refunds,jdbcType=DOUBLE},
+      refundsdate = #{record.refundsdate,jdbcType=TIMESTAMP},
+      isinvoice = #{record.isinvoice,jdbcType=TINYINT},
+      invoicecount = #{record.invoicecount,jdbcType=DOUBLE},
+      invoicedate = #{record.invoicedate,jdbcType=TIMESTAMP},
+      supplytype = #{record.supplytype,jdbcType=VARCHAR},
+      isdelete = #{record.isdelete,jdbcType=TINYINT},
+      createdate = #{record.createdate,jdbcType=TIMESTAMP},
+      updatedate = #{record.updatedate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.heag.rcpc.model.RpProject" >
+    update rp_project
+    <set >
+      <if test="iContractid != null" >
+        i_contractid = #{iContractid,jdbcType=VARCHAR},
+      </if>
+      <if test="oContractid != null" >
+        o_contractid = #{oContractid,jdbcType=VARCHAR},
+      </if>
+      <if test="signdate != null" >
+        signdate = #{signdate,jdbcType=TIMESTAMP},
+      </if>
+     <choose>
+      <when  test="techdate != null" >
+        techdate = #{techdate,jdbcType=TIMESTAMP},
+      </when>  
+      <when  test="techdate == null" >
+        techdate = null,
+      </when>           
+     </choose>     
+      <if test="buycorp != null" >
+        buycorp = #{buycorp,jdbcType=VARCHAR},
+      </if>
+      <if test="buyno != null" >
+        buyno = #{buyno,jdbcType=VARCHAR},
+      </if>
+      <if test="custname != null" >
+        custname = #{custname,jdbcType=VARCHAR},
+      </if>
+      <if test="projectname != null" >
+        projectname = #{projectname,jdbcType=VARCHAR},
+      </if>
+      <if test="itypeid != null" >
+        itypeid = #{itypeid,jdbcType=INTEGER},
+      </if>
+      <if test="itypename != null" >
+        itypename = #{itypename,jdbcType=VARCHAR},
+      </if>
+      <if test="regionid != null" >
+        regionid = #{regionid,jdbcType=INTEGER},
+      </if>
+      <if test="region != null" >
+        region = #{region,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceid != null" >
+        provinceid = #{provinceid,jdbcType=INTEGER},
+      </if>
+      <if test="province != null" >
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="channel != null" >
+        channel = #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="salesman != null" >
+        salesman = #{salesman,jdbcType=VARCHAR},
+      </if>
+      <if test="productid != null" >
+        productid = #{productid,jdbcType=INTEGER},
+      </if>
+      <if test="productname != null" >
+        productname = #{productname,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null" >
+        model = #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="danwei != null" >
+        danwei = #{danwei,jdbcType=VARCHAR},
+      </if>
+      <if test="count != null" >
+        count = #{count,jdbcType=DOUBLE},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="realprice != null" >
+        realprice = #{realprice,jdbcType=DOUBLE},
+      </if>
+      <if test="contractprice != null" >
+        contractprice = #{contractprice,jdbcType=DOUBLE},
+      </if>
+      <if test="totalprice != null" >
+        totalprice = #{totalprice,jdbcType=DOUBLE},
+      </if>
+      <if test="offerprice != null" >
+        offerprice = #{offerprice,jdbcType=DOUBLE},
+      </if>
+      <if test="deptid != null" >
+        deptid = #{deptid,jdbcType=INTEGER},
+      </if>
+      <if test="deptname != null" >
+        deptname = #{deptname,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="refunds != null" >
+        refunds = #{refunds,jdbcType=DOUBLE},
+      </if>
+      <choose>
+      <when test="refundsdate != null" >
+        refundsdate = #{refundsdate,jdbcType=TIMESTAMP},
+      </when>
+      <when test="refundsdate == null" >
+        refundsdate = null,
+      </when>      
+      </choose>
+      <if test="isinvoice != null" >
+        isinvoice = #{isinvoice,jdbcType=TINYINT},
+      </if>
+      <if test="invoicecount != null" >
+        invoicecount = #{invoicecount,jdbcType=DOUBLE},
+      </if>
+      <choose>
+      <when test="invoicedate != null" >
+        invoicedate = #{invoicedate,jdbcType=TIMESTAMP},
+      </when>
+      <when test="invoicedate == null" >
+        invoicedate = null,
+      </when>      
+      </choose>
+      <if test="supplytype != null" >
+        supplytype = #{supplytype,jdbcType=VARCHAR},
+      </if>
+      <if test="isdelete != null" >
+        isdelete = #{isdelete,jdbcType=TINYINT},
+      </if>
+      <if test="createdate != null" >
+        createdate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedate != null" >
+        updatedate = #{updatedate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where pid = #{pid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.heag.rcpc.model.RpProject" >
+    update rp_project
+    set i_contractid = #{iContractid,jdbcType=VARCHAR},
+      o_contractid = #{oContractid,jdbcType=VARCHAR},
+      signdate = #{signdate,jdbcType=TIMESTAMP},
+      techdate = #{techdate,jdbcType=TIMESTAMP},
+      buycorp = #{buycorp,jdbcType=VARCHAR},
+      buyno = #{buyno,jdbcType=VARCHAR},
+      custname = #{custname,jdbcType=VARCHAR},
+      projectname = #{projectname,jdbcType=VARCHAR},
+      itypeid = #{itypeid,jdbcType=INTEGER},
+      itypename = #{itypename,jdbcType=VARCHAR},
+      regionid = #{regionid,jdbcType=INTEGER},
+      region = #{region,jdbcType=VARCHAR},
+      provinceid = #{provinceid,jdbcType=INTEGER},
+      province = #{province,jdbcType=VARCHAR},
+      channel = #{channel,jdbcType=VARCHAR},
+      salesman = #{salesman,jdbcType=VARCHAR},
+      productid = #{productid,jdbcType=INTEGER},
+      productname = #{productname,jdbcType=VARCHAR},
+      model = #{model,jdbcType=VARCHAR},
+      danwei = #{danwei,jdbcType=VARCHAR},
+      count = #{count,jdbcType=DOUBLE},
+      price = #{price,jdbcType=DOUBLE},
+      realprice = #{realprice,jdbcType=DOUBLE},
+      contractprice = #{contractprice,jdbcType=DOUBLE},
+      totalprice = #{totalprice,jdbcType=DOUBLE},
+      offerprice = #{offerprice,jdbcType=DOUBLE},
+      deptid = #{deptid,jdbcType=INTEGER},
+      deptname = #{deptname,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      refunds = #{refunds,jdbcType=DOUBLE},
+      refundsdate = #{refundsdate,jdbcType=TIMESTAMP},
+      isinvoice = #{isinvoice,jdbcType=TINYINT},
+      invoicecount = #{invoicecount,jdbcType=DOUBLE},
+      invoicedate = #{invoicedate,jdbcType=TIMESTAMP},
+      supplytype = #{supplytype,jdbcType=VARCHAR},
+      isdelete = #{isdelete,jdbcType=TINYINT},
+      createdate = #{createdate,jdbcType=TIMESTAMP},
+      updatedate = #{updatedate,jdbcType=TIMESTAMP}
+    where pid = #{pid,jdbcType=INTEGER}
+  </update>
+  <update id="deleteByPrimaryKeyList" parameterType="com.heag.rcpc.model.RpProjectExample" >
+    update rp_project set isdelete= 1
+ 	<if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </update>  
+</mapper>

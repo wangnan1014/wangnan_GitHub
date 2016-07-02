@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--   <plugins>
+            指定数据库分页方言Dialect, 其它方言:OracleDialect,SQLServerDialect,SybaseDialect,DB2Dialect,PostgreSQLDialect,MySQLDialect,DerbyDialect
+        <plugin interceptor="cn.org.rapid_framework.ibatis3.plugin.OffsetLimitInterceptor">
+            <property name="dialectClass" value="cn.org.rapid_framework.jdbc.dialect.MySQLDialect"/>
+        </plugin>
+    </plugins>-->
+
+    <mappers>
+        <mapper resource="sqlMap/WebUserMapper.xml"/>
+        <mapper resource="sqlMap/RpLogMapper.xml" />
+        <mapper resource="sqlMap/RpUserMapper.xml"/>
+        <mapper resource="sqlMap/RpRoleMapper.xml"/>
+        <mapper resource="sqlMap/RpCompanyMapper.xml"/>
+        <mapper resource="sqlMap/RpDepartmentMapper.xml"/>
+        <mapper resource="sqlMap/RpProjectMapper.xml"/>
+        <mapper resource="sqlMap/RpIndustryMapper.xml"/>
+        <mapper resource="sqlMap/RpProvinceMapper.xml"/>        
+        <mapper resource="sqlMap/RpRegionMapper.xml"/>
+        <!-- 360度人才评测项目 -->
+        
+        <mapper resource="sqlMap/PcAskinfoMapper.xml"/>
+        <mapper resource="sqlMap/PcEvaluateMapper.xml"/>
+        <mapper resource="sqlMap/PcEvaluateRelationMapper.xml"/>
+        <mapper resource="sqlMap/PcQuestionMapper.xml"/>
+        <mapper resource="sqlMap/RpRegionMapper.xml"/>
+        <mapper resource="sqlMap/PcResultMapper.xml"/>
+    </mappers>
+</configuration>

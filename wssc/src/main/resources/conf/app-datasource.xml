@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+        default-autowire="byName">
+
+			 <!-- com.mchange.v2.c3p0.ComboPooledDataSource类在c3p0-0.9.5.1.jar包的com.mchange.v2.c3p0包中 -->
+			 <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+			 	<property name="driverClass" value="com.mysql.jdbc.Driver" />
+			 	<property name="jdbcUrl" value="jdbc:mysql://10.0.10.107:3306/test" />
+			 	<property name="user" value="wn" />
+			 	<property name="password" value="wn" />
+			 </bean>
+       		 <!--配置sessionFactory org.springframework.orm.hibernate4.LocalSessionFactoryBean类在spring-orm-4.2.4.RELEASE.jar包的org.springframework.orm.hibernate4包中 -->
+			 <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">  
+			     <property name="dataSource" ref="dataSource" />  
+			     <property name="configLocation" value="classpath:/hibernate.cfg.xml" /> <!-- 加载hibernate配置文件 -->  
+			 </bean>
+			 <!--配置事务管理器 org.springframework.orm.hibernate4.HibernateTransactionManager类spring-orm-4.2.4.RELEASE.jar包的org.springframework.orm.hibernate4包中 --> 
+			 <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">  
+			     <property name="sessionFactory" ref="sessionFactory" />  
+			 </bean>  			 
+</beans> 

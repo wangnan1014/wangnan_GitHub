@@ -1,0 +1,63 @@
+package com.heag.rcpc.dao;
+
+import java.util.ArrayList;
+
+import com.heag.rcpc.model.PcEvaluate;
+import com.heag.rcpc.model.PcEvaluateExample;
+
+public
+interface IPcEvaluateDao {
+    /**
+     * 根据条件查询所有被评估人信息(sql语句改过，详细请看mapper)
+     * @param PcEvaluateExample
+     * @return 成功  ArrayList<PcEvaluate>  
+     */
+    public ArrayList<PcEvaluate> selectByExample(PcEvaluateExample pee);
+    /**
+     * 新增被评估人信息
+     * @param PcEvaluate
+     * @return   
+     */
+    public String insertSelective(PcEvaluate pa);  
+    /**
+     * 根据 eid查询被评估人信息
+     * @param eid
+     * @return   PcEvaluate
+     */
+    public PcEvaluate selectByPrimaryKey(Integer eid);  
+    /**
+     * 根据条件查询被评估人信息数
+     * @param PcEvaluateExample
+     * @return   Integer
+     */    
+    public Integer countByExample(PcEvaluateExample pee);
+    /**
+     * 根据eid 删除被评估人信息
+     * @param eid
+     * @return   String
+     */   
+    public String deleteByPrimaryKey(Integer eid);
+    
+    
+    /**
+     * 根据eids删除被评估人信息
+     * @param PcEvaluateExample
+     * @return   int
+     */ 
+	public int deleteByExample(PcEvaluateExample pee);    
+	
+	
+    /**
+     * 根据eid更新被评估人信息
+     * @param PcEvaluate
+     * @return   String
+     */   
+    public int updateByPrimaryKeySelective(PcEvaluate pe);
+    
+	public int updateByExampleSelective(PcEvaluate pe, PcEvaluateExample pee);
+	
+	
+    
+    
+   
+}

@@ -1,0 +1,34 @@
+$(function (){
+ 
+});
+
+function check(){
+
+    if($.trim($("#ename").val())==''){
+        $("#info").text("请填写姓名！").show();
+        $("#ename").val("");
+        $("#ename").focus();
+
+        return  false;
+    }
+    if($.trim($("#dname").val())==''){
+        $("#info").text("请填写部门！").show();
+        $("#dname").val("");
+        $("#dname").focus();
+
+        return  false;
+    }
+    if($.trim($("#password").val())==''){
+    //    $("#loginin").attr("data-content","请填写密码!");
+        $("#info").text("请填写密码！").show();
+        $("#password").val("");
+        $("#password").focus();
+    //    $("[data-toggle='popover']").popover();
+
+        return  false;
+    }
+    return true;
+}
+
+
+ 

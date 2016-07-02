@@ -1,0 +1,146 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>日志记录列表</title>
+<link rel="stylesheet" href="../css/datatables/jquery.dataTables.css" type="text/css"></link>
+</head>
+<body>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">日志记录列表</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                                                      
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="dataTable_wrapper">
+                               
+                                <table  class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                    <thead>
+                                        <tr>                                     	
+                                            <th></th>
+                                            <th>所属公司</th>
+                                            <th>所属部门</th>
+                                            <th>用户名</th>
+                                            <th>操作行为</th>
+                                            <th>涉及页面</th>
+                                            <th>涉及的数据库表</th>
+                                            <th>涉及的数据库表记录id</th>
+                                            <th>涉及字段名</th>
+                                            <th>更新前数据</th>
+                                            <th>更新后数据</th>
+                                            <th>操作时间</th>
+                                        </tr>
+                                    </thead>
+								    <tbody id ="dataList">
+  		
+								    </tbody>
+                                </table>
+                                
+                            </div>
+                            <!-- /.table-responsive -->
+
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+
+    <!-- DataTables JavaScript -->
+    <script src="../js/jquery.dataTables.min.js"></script>
+    <script src="../js/dataTables.bootstrap.min.js"></script>
+    <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+    <script>
+    $(document).ready(function() {
+		
+	    var table = $('#dataTables-example').DataTable( {
+			"bProcessing":true,	//开启读取服务器数据时显示正在加载中……特别是大数据量的时候，开启此功能比较好	    
+			//"bServerSide": true,//开启此模式后，你对datatables的每个操作 每页显示多少条记录、下一页、上一页、排序（表头）、搜索，这些都会传给服务器相应的值。--一般不开 开了 都要自己设置
+	        //"aoColumnDefs": [{ "bVisible": false, "aTargets": [0]}]//隐藏列
+	        "bAutoWidth":true,
+	        "ajax": {
+		        url:"../log/getDataList.action?rand="+Math.random() ,
+	 			type: "POST",
+		       	dataType : "json",
+	        },
+			"columns": [
+				{ data: 'lid', "visible": false },//隐藏 可在后面添加逗号隔开
+				{ data: 'cname' },
+				{ data: 'deptname' },
+				{ data: 'uname' },
+				{ data: 'action' },
+				{ data: 'page' },
+				{ data: 'tablename' },
+				{ data: 'dataid' },
+				{ data: 'dataname' },
+				{ data: 'beforeupdate' },
+				{ data: 'afterupdate' },
+				{ data: 'createdate' },
+			],
+	        "deferRender": true,
+			"bAutoWidth": true,
+			"fnCreatedRow": function (nRow, aData, iDisplayIndex) {
+				var val = $('td:eq(3)', nRow).text();
+				if(val=='1'){
+					$('td:eq(3)', nRow).html("登录");
+				}else if(val=='2'){
+					$('td:eq(3)', nRow).html("登出");
+				}else if(val=='3'){
+					$('td:eq(3)', nRow).html("查询");
+				}else if(val=='4'){
+					$('td:eq(3)', nRow).html("新增");
+				}else if(val=='5'){
+					$('td:eq(3)', nRow).html("修改");
+				}else if(val=='6'){
+					$('td:eq(3)', nRow).html("删除");
+				}else if(val=='7'){
+					$('td:eq(3)', nRow).html("导出数据");
+				}
+			},
+			"aoColumnDefs": [//和aoColums类似，但他可以给指定列附近属性
+                   {"bSortable": false, "aTargets": [0,4]},  //这句话意思是第5列（从0开始算） 不能排序
+            ],
+               "aaSorting": [[0, "desc"]], //默认排序 
+               "oLanguage": {
+                    "sProcessing": "正在加载中......",
+                    "sLengthMenu": "每页显示 _MENU_ 条记录",
+                    "sZeroRecords": "对不起，查询不到相关数据！",
+                    "sEmptyTable": "表中无数据存在！",
+                    "sInfo": "当前显示 _START_ 到 _END_ 条，共 _TOTAL_ 条",
+                    "sInfoFiltered": " (数据表中共有 _MAX_ 条记录)",
+                    "sSearch": "搜索：",
+                    "oPaginate": {
+                        "sFirst": "首页",
+                        "sPrevious": "上一页",
+                        "sNext": "下一页",
+                        "sLast": "末页"
+                    }
+             },
+   
+    } );
+ 
+
+ });
+
+    </script>
+
+</body>
+
+</html>
+

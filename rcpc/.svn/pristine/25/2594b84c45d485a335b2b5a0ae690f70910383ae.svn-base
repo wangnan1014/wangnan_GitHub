@@ -1,0 +1,52 @@
+package com.heag.rcpc.action;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.print.DocFlavor.STRING;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.heag.rcpc.mapper.PcAskinfoMapper;
+import com.heag.rcpc.util.ExcelUtil;
+import com.opensymphony.xwork2.ActionSupport;
+
+public class CollectAction extends ActionSupport {
+	@Autowired
+	private PcAskinfoMapper pcAskinfoMapper;
+	@Override
+	public String execute() throws Exception {
+		// TODO Auto-generated method stub
+		return super.execute();
+	}
+	public String collectToExcel() throws Exception {
+		List<Object[]> list = new ArrayList();
+
+		ArrayList<String> s1= new ArrayList<String>();s1.add("1");s1.add("1");
+		ArrayList<String> s2= new ArrayList<String>();s2.add("2");s2.add("1");
+		ArrayList<String> s3= new ArrayList<String>();s3.add("3");s3.add("1");
+		ArrayList<String> s4= new ArrayList<String>();s4.add("4");s4.add("1");
+		ArrayList<String> s5= new ArrayList<String>();s5.add("5");s5.add("1");
+		ArrayList<String> s6= new ArrayList<String>();s6.add("6");s6.add("1");
+		
+		list.add(s1.toArray());
+		list.add(s2.toArray());
+		list.add(s3.toArray());
+		list.add(s4.toArray());
+		list.add(s5.toArray());
+		list.add(s6.toArray());
+		Map<String,Integer> map = new HashMap<String, Integer>();
+		map.put("aid", 35);
+		map.put("eid", 83);
+		map.put("isBCollect", null);
+		List< ArrayList<String>> l1 = pcAskinfoMapper.getCollectDate(map);
+
+		ExcelUtil eu = new ExcelUtil();
+		eu.outputExcel("wanganna.xls", l1);
+		return NONE;
+	}	
+}
+

@@ -1,0 +1,45 @@
+package com.heag.rcpc.dao.impl;
+
+import java.util.ArrayList;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.heag.rcpc.dao.IPcResultDao;
+import com.heag.rcpc.mapper.PcResultMapper;
+import com.heag.rcpc.model.PcResult;
+import com.heag.rcpc.model.PcResultExample;
+
+public class PcResultDaoImpl implements IPcResultDao {
+	@Autowired
+	private PcResultMapper pcResultMapper;
+	public Integer countByExample(PcResultExample pre) {
+		// TODO Auto-generated method stub
+		return pcResultMapper.countByExample(pre);
+	}
+
+	public String deleteByPrimaryKey(Integer rid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String insertSelective(PcResult pr) {
+		
+		return pcResultMapper.insertSelective(pr)+"";
+	}
+
+	public ArrayList<PcResult> selectByExample(PcResultExample pre) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public PcResult selectByPrimaryKey(Integer rid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String updateByPrimaryKey(PcResult pr) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}
