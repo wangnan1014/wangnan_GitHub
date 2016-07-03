@@ -7,9 +7,9 @@
 			 <!-- com.mchange.v2.c3p0.ComboPooledDataSource类在c3p0-0.9.5.1.jar包的com.mchange.v2.c3p0包中 -->
 			 <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
 			 	<property name="driverClass" value="com.mysql.jdbc.Driver" />
-			 	<property name="jdbcUrl" value="jdbc:mysql://10.0.10.107:3306/test" />
-			 	<property name="user" value="wn" />
-			 	<property name="password" value="wn" />
+			 	<property name="jdbcUrl" value="jdbc:mysql://127.0.01:3306/test" />
+			 	<property name="user" value="root" />
+			 	<property name="password" value="root" />
 			 </bean>
        		 <!--配置sessionFactory org.springframework.orm.hibernate4.LocalSessionFactoryBean类在spring-orm-4.2.4.RELEASE.jar包的org.springframework.orm.hibernate4包中 -->
 			 <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">  

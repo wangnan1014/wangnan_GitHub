@@ -5,5 +5,6 @@
 	<!-- 
 	<bean id="baseStrutsAction" class="com.it.shop.action.BaseStrutsAction" scope="prototype"/>	
 	<bean id="categoryAction" class="com.it.shop.action.CategoryAction" scope="prototype" parent="baseStrutsAction"/>
+	<bean id="sendAction" class="cn.it.shop.action.SendAction" />
 	 -->
 </beans> 

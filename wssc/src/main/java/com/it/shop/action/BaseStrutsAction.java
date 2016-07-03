@@ -51,7 +51,7 @@ public class BaseStrutsAction<T> extends ActionSupport implements RequestAware,S
 	
 	//service对象 
 	@Resource
-	protected CategoryService categoryService;  
+	protected CategoryService categoryService;
 	@Resource
 	protected AccountService accountService;    
 

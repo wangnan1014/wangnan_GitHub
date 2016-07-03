@@ -5,9 +5,18 @@
 
 <struts>
 	<package name="shop" extends="struts-default">
-	<action name="category_*" class="com.it.shop.action.CategoryAction" method="{1}">  
-          <result name="index">/index.jsp</result>  
-          <result name="out">/index.jsp</result>
-    </action>  
+		<!-- 全局result，对这个package中的所有action有效 --> 
+		<global-results>  
+	         <result name="aindex">/WEB-INF/main/aindex.jsp</result>  
+	    </global-results>    
+	    
+		<action name="category_*" class="com.it.shop.action.CategoryAction" method="{1}">  
+	         <result name="index">/index.jsp</result>  
+	         <result name="out">/index.jsp</result>
+	    </action> 	    
+		<!-- 用来完成系统 请求转发的action,所有的请求都交给execute-->  
+        <action name="send_*_*" class="com.it.shop.action.SendAction">  
+            <result name="send">/WEB-INF/{1}/{2}.jsp</result>  
+        </action>     
 	</package>  
 </struts>

@@ -21,26 +21,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	-->
 	<%@include file="/public/head.jspf" %>
   </head>
-  
-  <body>
-    This is my JSP page. <br>
+	<body class="easyui-layout">   
+	    <div data-options="region:'north',title:'North Title',split:true" style="height:100px;"></div>   
+	    <div data-options="region:'west',title:'West',split:true" style="width:300px;">
+			<div id="aa" class="easyui-accordion" style="width:300px;height:auto;">   
+			    <div title="Title1" data-options="iconCls:'icon-save'" style="overflow:auto;padding:10px;">   
+			        <h3 style="color:#0099FF;">Accordion for jQuery</h3>   
+			        <p>Accordion is a part of easyui framework for jQuery.     
+			        It lets you define your accordion component on web page more easily.</p>   
+			    </div>   
+			    <div title="Title2" data-options="iconCls:'icon-reload',selected:true" style="padding:10px;">   
+			        content2    
+			    </div>   
+			    <div title="Title3">   
+			        content3    
+			    </div>  
+			    <div title="Title4">   
+			       <a href="send_main_aindex.action">测试到后台</a>
+			    </div>  
+			</div>	    
+	    </div>   
+	    <div data-options="region:'center',title:'center title'" style="padding:5px;background:#eee;"></div>   
+	</body> 
     
-    <br>
-    <a href="${pageContext.request.contextPath}/category_update.action?category.id=2&category.type=gga&category.hot=false">访问update</a> 
-    <a href="category_save.action">访问save</a> 
-    ${category.getType()} 
-    <a href="category_query.action">查询所有类别</a><br/>
-    <label>requestScope</label></br>
-    <c:forEach items="${requestScope.categoryList}" var="category">
-    	${category.getId()} | ${category.getType()} | ${category.getHot()} <br/>
-    </c:forEach>
-    <label>sessionScope</label></br>
-    <c:forEach items="${sessionScope.categoryList}" var="category">
-    	${category.getId()} | ${category.getType()} | ${category.getHot()} <br/>
-    </c:forEach>
-    <label>applicationScope</label></br>
-    <c:forEach items="${applicationScope.categoryList}" var="category">
-    	${category.getId()} | ${category.getType()} | ${category.getHot()} <br/>
-    </c:forEach>    
-  </body>
 </html>
