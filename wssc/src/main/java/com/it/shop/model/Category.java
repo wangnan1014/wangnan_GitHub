@@ -1,5 +1,11 @@
 package com.it.shop.model;
 
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.it.shop.user.Account;
+
 /**
  * Category entity. @author MyEclipse Persistence Tools
  */
@@ -11,7 +17,7 @@ public class Category implements java.io.Serializable {
 	private Integer id;
 	private String type;
 	private Boolean hot;
-
+	private Account account;
 	// Constructors
 
 	/** default constructor */
@@ -49,5 +55,9 @@ public class Category implements java.io.Serializable {
 	public void setHot(Boolean hot) {
 		this.hot = hot;
 	}
-
+	@ManyToOne(fetch = FetchType.EAGER)  
+	@JoinColumn(name = "account_id")  
+	public Account getAccount() {  
+	    return this.account;  
+	} 
 }

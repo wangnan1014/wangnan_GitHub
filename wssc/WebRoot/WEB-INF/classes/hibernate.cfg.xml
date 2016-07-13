@@ -11,20 +11,21 @@
 			org.hibernate.dialect.MySQLDialect
 		</property>
 		<!-- 
-		<property name="connection.url">
+			<property name="connection.url">
 			jdbc:mysql://10.0.10.107:3306/test
-		</property>
-		<property name="connection.username">wn</property>
-		<property name="connection.password">wn</property>
-		<property name="connection.driver_class">
+			</property>
+			<property name="connection.username">wn</property>
+			<property name="connection.password">wn</property>
+			<property name="connection.driver_class">
 			com.mysql.jdbc.Driver
-		</property>
-		<property name="myeclipse.connection.profile">
+			</property>
+			<property name="myeclipse.connection.profile">
 			Mysql5.6.25
-		</property>
-		 -->
+			</property>
+		-->
 		<mapping resource="com/it/shop/model/Category.hbm.xml" />
 		<mapping resource="com/it/shop/model/Table1.hbm.xml" />
+		<mapping resource="com/it/shop/model/Account.hbm.xml" />
 
 	</session-factory>
 

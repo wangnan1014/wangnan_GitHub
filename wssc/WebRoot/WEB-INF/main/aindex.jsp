@@ -82,7 +82,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			    <div title="基本操作" data-options="iconCls:'icon-save'">   
 			    <ul>
 					<li><a href="javascript:void(0)" title="send_main_aindex.action">类别管理</a>
-					<li><a href="javascript:void(0)" title="send_main_aindex.action">商品管理</a>
+					<li><a href="javascript:void(0)" title="send_main_query.action">商品管理</a>
 				</ul>    
 			    </div>   
 			    <div title="其他操作" data-options="iconCls:'icon-reload',selected:true" >  

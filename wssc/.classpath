@@ -15,6 +15,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/spring4.2.4-persistence"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/spring4.2.4-web"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/struts2.3.41"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="D:/soft_jar/wn_soft/junit-4.9.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>
